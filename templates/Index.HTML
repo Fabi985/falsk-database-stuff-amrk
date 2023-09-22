@@ -1,0 +1,19 @@
+{% extends "Base.HTML" %}
+{% block title %}{{title}} Page{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+
+<body>
+    <h1>Hello World!</h1><br>
+    <h1>H1 - 72PX</h1>
+    <h2>H2 - 48PX</h2>
+    <h3>H3 - 36PX</h3>
+    <h4>H4 - 28PX</h4>
+    <p>P - 15px</p>
+    <h4>This website looks like it was made in 1993!</h4>
+    <br>
+    <iframe width="420" height="315"
+        src="https://www.youtube.com/watch?v=dvjy6V4vLlI">
+    </iframe>
+</body>
+{% endblock %}

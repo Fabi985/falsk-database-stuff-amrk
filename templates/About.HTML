@@ -1,0 +1,19 @@
+{% extends "Base.HTML" %}
+{% block title %}{{title}} Page{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+
+<body>
+    <h2>Hello World!</h2>
+    <h4>about and stuff yadayada</h4>
+    <div class="Testing-container">
+        <h3>We are Toka Fitness</h3>
+        <h4>AAAAAAAAAAAAA</h4>
+        <h4>AAAAAAAAAAAAA</h4>
+        <h4>AAAAAAAAAAAAA</h4>
+        <h4>AAAAAAAAAAAAA</h4>
+        <h4>AAAAAAAAAAAAA</h4>
+        <a class="button" href="home">Back to home page</a>
+    </div>
+</body>
+{% endblock %}

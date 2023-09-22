@@ -1,0 +1,40 @@
+{% extends "Base.HTML" %}
+{% block title %}{{title}} Page{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+
+<div class="border signUpPhoto-container">
+
+</div>
+
+<div class="container border signUp-Forms" id="signUp-Forms">
+    <h4>Create a new account</h4>
+    <h4>It's free and always will be!</h4>
+    <br>
+    <form>  
+        <div class="form-group">
+            <label for="John">First name</label>
+            <input type="name" class="form-control" id="John" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <label for="Doe">Last name</label>
+            <input type="name" class="form-control" id="Doe" placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">something yada yada</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
