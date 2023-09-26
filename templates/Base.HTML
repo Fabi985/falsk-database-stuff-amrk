@@ -6,7 +6,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #999dbb;">
-            <a class="navbar-brand" href="home">Toka Fitness</a>
+            <a class="navbar-brand" href="/home">Toka Fitness</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -14,28 +14,40 @@
               <ul class="navbar-nav">
                 {% if title == "Home" %}
                   <li class="nav-item active">
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home">Home |<span class="sr-only">(current)</span></a>
                   </li>
                 {% elif title != "Home" %}
                   <li class="nav-item">
-                    <a class="nav-link" href="home">Home</a>
+                    <a class="nav-link" href="/home">Home |</a>
                   </li>
                 {% endif %}
                 {% if title != "About" %}
                   <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
+                    <a class="nav-link" href="/about">About |</a>
                   </li>
                 {% elif title == "About" %}
                   <li class="nav-item active">
-                    <a class="nav-link" href="about">About <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/about">About |<span class="sr-only">(current)</span></a>
                   </li>
                 {% endif %}
                 <li class="nav-item">
-                  <a class="nav-link user-button nav-button" href="sign-up">Sign Up</a>
+                  <a class="nav-link" href="/data">Book Data |</a>
+                </li>
+                {% if current_user %}
+                <li class="nav-item">
+                  <a class="nav-link user-button nav-button" href="/logout">Sign out</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="data">PENDEJO</a>
+                  <a class="nav-link" href="/user">User Page |</a>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link user-button nav-button" href="/sign-up">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Login">login page |</a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </nav>

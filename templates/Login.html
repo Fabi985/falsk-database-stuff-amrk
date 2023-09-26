@@ -1,0 +1,73 @@
+{% extends "Base.HTML" %}
+{% block title %}{{title}} Page{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+
+
+<script> 
+
+        // hides or shows the inputted password 
+    
+        function togglePassword() { 
+    
+        var passwordInput = document.getElementById("pword"); 
+    
+        if (passwordInput.type === "password") { 
+    
+            passwordInput.type = "text"; 
+    
+                event.target.textContent = "Hide"; 
+    
+            } else { 
+    
+            passwordInput.type = "password"; 
+    
+                event.target.textContent = "Show"; 
+    
+            } 
+    
+        } 
+    
+    </script> 
+
+<body>
+    <div class="container"> 
+
+        <form action="/UserLogin" method="POST"> 
+        
+            <h3 style="text-align: center;">This is a login page</h3> 
+        
+                <p style="text-align: center;">User Name</p> 
+        
+                <p style="text-align: center;">
+                    <input type="text" id="nm" name="nm" />
+                </p> 
+        
+                <!-- <p>Email</p> 
+        
+                <p><input type ="text" name ="email"/></p> --> 
+        
+                <p style="text-align: center;">Password</p> 
+        
+                <p style="text-align: center;"> 
+        
+                    <input type="password" id="pword" name="pword" /> 
+        
+                    <button type="button" onclick="togglePassword()">Show</button> <!--call our javascript toggle password --> 
+        
+                </p> 
+        
+                <p style="text-align: center;">
+                    <input type="submit" name="submit" />
+                </p> 
+        
+                <a class="nav-link" href='/sign-up' style="text-align: center;">Need to Register?</a> 
+        
+        </form> 
+        
+        </div> 
+</body>
+{% endblock %}

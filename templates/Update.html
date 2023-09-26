@@ -1,0 +1,12 @@
+{% extends "Base.HTML" %}
+{% block title %}{{title}} Page{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+
+<body>
+    <h2>This should be the update page for:</h2>
+    <h3>Book ID: {{book[0][0]}}</h3>
+    <h3>Book Title: {{book[0][1]}}</h3>
+    <h3>Author Name: {{book[0][2]}}</h3>
+</body>
+{% endblock %}

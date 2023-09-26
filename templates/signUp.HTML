@@ -2,6 +2,9 @@
 {% block title %}{{title}} Page{% endblock %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 
 <div class="border signUpPhoto-container">
 
@@ -11,22 +14,30 @@
     <h4>Create a new account</h4>
     <h4>It's free and always will be!</h4>
     <br>
-    <form>  
+    <form action="/register" method="POST">  
         <div class="form-group">
-            <label for="John">First name</label>
-            <input type="name" class="form-control" id="John" placeholder="First name">
+            <label>Username</label>
+            <input type="text" class="form-control" id="nm" name="nm" placeholder="Username">
         </div>
         <div class="form-group">
-            <label for="Doe">Last name</label>
-            <input type="name" class="form-control" id="Doe" placeholder="Last name">
+            <label>Membership type</label>
+            <select type="text" class="form-control" id="mtype" name="mtype" required="true">
+                <optgroup label="Pick a membership type">Pick a membership type</optgroup>
+                <option value="None">None</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Senior Citizen">Senior Citizen</option>
+            </select>
+            <small id="emailHelp" class="form-text text-muted">You have to pick a membership type.</small>
+
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label>Password</label>
+            <input type="text" class="form-control" id="pword" name="pword" placeholder="Password">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label >Email address</label>
+            <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-check">
