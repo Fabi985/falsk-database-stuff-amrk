@@ -5,13 +5,14 @@
 
 <body>
     {% if current_user %}
-        <h3>Hello {{ current_user }}! </h3>
+        <h3 style="display: inline; border: 1px solid black;">Hello {{ current_user }}! </h3>
     {% endif %}
     
-    <h4>This website looks like it was made in 1993!</h4>
-    <br>
-    <iframe width="420" height="315"
-        src="https://www.youtube.com/watch?v=dvjy6V4vLlI">
-    </iframe>
+    <h4 >This website looks like it was made in 1993!</h4>
+    <div class="video-container">
+        <iframe width="420" height="315" class="crash-video"
+            src="https://www.youtube.com/embed/YJMKo4PLSOs">
+        </iframe>
+    </div>
 </body>
 {% endblock %}

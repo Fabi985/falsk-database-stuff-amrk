@@ -22,7 +22,8 @@ def homePage():
 def aboutPage():
     title = "About"
     current_user = session.get("user")
-    return render_template("About.HTML", title = title, current_user=current_user)
+    trainers = db.queryDB('SELECT * FROM Trainer_TBL')
+    return render_template("About.HTML", title = title, current_user=current_user, trainers=trainers)
 
 # This will redirect the user back to the Home page
 @app.route("/home")
@@ -144,19 +145,27 @@ def register():
         password = request.form["pword"]
         email = request.form["email"]
         membership_type = request.form["mtype"]
+        Trainer_Profile = 'default.png'
 
-        print(user, password, email)
+        print(membership_type)
 
         hashed_email = hashlib.md5(str(email).encode()).hexdigest()
         hashed_password = hashlib.md5(str(password).encode()).hexdigest()
 
-        result = db.queryDB('SELECT * FROM User_TBL WHERE User_Name = ? OR User_Email = ?', [user,  hashed_email])
-        print(result)
+        result = db.queryDB('SELECT * FROM User_TBL WHERE User_Email = ?', [hashed_email])
         if result:
-            flash("Dont work :(", "danger")
+            flash("User Email already in use :(", "danger")
             return redirect(url_for("register"))
         else:
             db.updateDB("INSERT INTO User_TBL (User_Name, User_Pass, User_Email, Membership_Type) VALUES (?,?,?,?)", [user, hashed_password, hashed_email, membership_type])
+            get_user_id = db.queryDB('SELECT User_ID FROM User_TBL WHERE User_Name = ? ', [user])
+            print(get_user_id)
+            if membership_type == "Trainer":
+                db.updateDB("INSERT INTO Trainer_TBL (Trainer_Name, Trainer_Profile) VALUES (?,?)", [user, Trainer_Profile])
+                
+                flash("signed up trainer", "info")
+            else:
+                print("user doesnt want to be a trainer")
             return render_template('Login.html', title='login', current_user=current_user)
     else:
             return render_template('signUp.html', title='register', current_user=current_user)

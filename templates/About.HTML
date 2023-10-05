@@ -4,16 +4,31 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
 
 <body>
-    <h2>Hello World!</h2>
-    <h4>about and stuff yadayada</h4>
-    <div class="Testing-container">
-        <h3>We are Toka Fitness</h3>
-        <h4>AAAAAAAAAAAAA</h4>
-        <h4>AAAAAAAAAAAAA</h4>
-        <h4>AAAAAAAAAAAAA</h4>
-        <h4>AAAAAAAAAAAAA</h4>
-        <h4>AAAAAAAAAAAAA</h4>
-        <a class="button" href="home">Back to home page</a>
+    <h2><center>Fitness app User Persoanas</center></h2>
+    <div class="container " id="people-grid-container">
+        {% for trainer in trainers %}
+        {% set Trainer_ID = trainer[0] %}
+        {% set Trainer_Name = trainer[2] %}
+        {% set Trainer_Data = trainer[3] %}
+        {% set Trainer_picture = trainer[4] %}
+        {% set Trainer_Desc = trainer[5] %}
+        <div class="card" style="background-color: black; width: fit-content;" id="people-card-grid">
+            <div class="card-body">
+                <h3 style="color: white;">{{ Trainer_Name }}</h3>
+                <div class="card" style="background-color: white; width: fit-content;">
+                    <img src="../static/Profile_pics/{{ Trainer_picture }}" id="profile-pic">
+                </div>
+            </div>
+            <div class="card m-1 p-1" style="background-color: grey;">
+                <h4 id="white">Bio</h4>
+                <p id="white">{{ Trainer_Data }}</p>
+            </div>
+            <div class="card m-1 p-1" style="background-color: grey;">
+                <h4 id="white">{{ Trainer_Name }}</h4>
+                <p id="white">{{ Trainer_Desc }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </body>
 {% endblock %}

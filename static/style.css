@@ -3,35 +3,38 @@ body {
     background-color:#FFEDE1;
 }
 
+.video-container {
+    float: right;
+    padding-right: 10%;
+    height: 1%;
+    position: fixed;
+    right: 5%;
+}
+
 h1 {
-    font-family: "Source Sans Pro", "Courier New", monospace;
     font-size: 52px;
     /* text-shadow: 0 0 3px #09ff00, 0 0 5px #0000ff;
     color: #09ff00; */
 }
 
 h2 {
-    font-family: "Source Sans Pro", "Courier New", monospace;
     font-size: 48px;
 }
 
 h3 {
-    font-family: "Source Sans Pro", "Courier New", monospace;
     font-size: 36px;
 }
 
 h4 {
-    font-family: "Source Sans Pro", "Courier New", monospace;
     font-size: 28px;
 }
 
 p {
-    font-family: "Source Sans Pro", "Courier New", monospace;
     font-size: 15px;
 }
 
-a {
-    font-family: "Source Sans Pro", "Courier New", monospace;
+#white{
+    color: white;
 }
 
 .button {
@@ -111,3 +114,33 @@ a {
         border: 1px solid black;
         padding: 1px;
     }
+
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 0px
+}
+
+
+#people-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px
+}
+
+#profile-pic{
+    width: 100px;
+    height: 100px;
+}
+
+#people-card-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px
+}
