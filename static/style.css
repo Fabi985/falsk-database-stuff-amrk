@@ -135,12 +135,38 @@ p {
 #profile-pic{
     width: 100px;
     height: 100px;
+    border-radius: 100px;
+}
+
+#img-card {
+    /* width: fit-content; */
+    /* display: inline-block;
+    width: auto;
+    border: solid; */
+    justify-items: center;
 }
 
 #people-card-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px
+}
+
+#user-profile-card{
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr); */
+    grid-template-columns: 1fr, 2fr;
+    grid-template-rows: repeat(0fr, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+#user-name-and-profile{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px
 }

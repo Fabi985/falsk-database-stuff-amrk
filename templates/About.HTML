@@ -14,18 +14,21 @@
         {% set Trainer_Desc = trainer[5] %}
         <div class="card" style="background-color: black; width: fit-content;" id="people-card-grid">
             <div class="card-body">
-                <h3 style="color: white;">{{ Trainer_Name }}</h3>
-                <div class="card" style="background-color: white; width: fit-content;">
+                <h3 style="color: white;">Trainer {{ Trainer_Name }}</h3>
+                <div class="card" style="background-color: transparent; width: fit-content;">
                     <img src="../static/Profile_pics/{{ Trainer_picture }}" id="profile-pic">
                 </div>
             </div>
-            <div class="card m-1 p-1" style="background-color: grey;">
-                <h4 id="white">Bio</h4>
-                <p id="white">{{ Trainer_Data }}</p>
+            <div>
+               
             </div>
-            <div class="card m-1 p-1" style="background-color: grey;">
+            <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
                 <h4 id="white">{{ Trainer_Name }}</h4>
                 <p id="white">{{ Trainer_Desc }}</p>
+            </div>
+            <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                <h4 id="white">Bio</h4>
+                <p id="white">{{ Trainer_Data }}</p>
             </div>
         </div>
         {% endfor %}

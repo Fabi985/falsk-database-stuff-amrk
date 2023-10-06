@@ -34,9 +34,10 @@ def backToHomePage():
 @app.route("/user")
 def userPage():
     title = "User Page"
-    current_user = session.get("user")
+    user = session.get("user")
     current_user_membership = session.get("membership")
-    return render_template("User.HTML", title = title, current_user=current_user, current_user_membership=current_user_membership)
+    current_user = db.queryDB('SELECT * FROM User_TBL WHERE User_Name = ?', [user])
+    return render_template("User.HTML", title = title, current_user=current_user)
 
 # This directs you to the sign up page
 @app.route("/sign-up")
@@ -115,7 +116,6 @@ def userLogin():
         password = request.form["pword"]
         hashed_password = hashlib.md5(str(password).encode()).hexdigest()
         found_user = db.queryDB('SELECT * FROM User_TBL WHERE User_Name = ?', [user])
-        print(found_user)
         if found_user:
             stored_password = found_user[0][2]
             if stored_password == hashed_password:
@@ -145,9 +145,7 @@ def register():
         password = request.form["pword"]
         email = request.form["email"]
         membership_type = request.form["mtype"]
-        Trainer_Profile = 'default.png'
-
-        print(membership_type)
+        Profile_Pic = 'default.png'
 
         hashed_email = hashlib.md5(str(email).encode()).hexdigest()
         hashed_password = hashlib.md5(str(password).encode()).hexdigest()
@@ -157,11 +155,10 @@ def register():
             flash("User Email already in use :(", "danger")
             return redirect(url_for("register"))
         else:
-            db.updateDB("INSERT INTO User_TBL (User_Name, User_Pass, User_Email, Membership_Type) VALUES (?,?,?,?)", [user, hashed_password, hashed_email, membership_type])
+            db.updateDB("INSERT INTO User_TBL (User_Name, User_Pass, User_Email, Membership_Type, User_Profile) VALUES (?,?,?,?,?)", [user, hashed_password, hashed_email, membership_type, Profile_Pic])
             get_user_id = db.queryDB('SELECT User_ID FROM User_TBL WHERE User_Name = ? ', [user])
-            print(get_user_id)
             if membership_type == "Trainer":
-                db.updateDB("INSERT INTO Trainer_TBL (Trainer_Name, Trainer_Profile) VALUES (?,?)", [user, Trainer_Profile])
+                db.updateDB("INSERT INTO Trainer_TBL (Trainer_Name, Trainer_Profile) VALUES (?,?)", [user, Profile_Pic])
                 
                 flash("signed up trainer", "info")
             else:
