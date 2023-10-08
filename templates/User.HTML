@@ -9,7 +9,7 @@
         {% set User_Name = current_user[0][1] %}
         {% set current_user_membership = current_user[0][4] %}
         {% set User_picture = current_user[0][5] %}
-        <div class="card" style="width: fit-content; border-radius: 10px;" id="user-profile-card">
+        <div class="card" style="width: fit-content; border-radius: 10px; background-color: grey;" id="user-profile-card">
             <div class="card" style="background-color: white;" id="img-card user-name-and-profile">
                 <div>
                     <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic" style='justify-items: center;'>

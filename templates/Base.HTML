@@ -35,17 +35,17 @@
                 </li>
                 {% if current_user %}
                 <li class="nav-item">
-                  <a class="nav-link user-button nav-button" href="/logout">Sign out</a>
+                  <a class="nav-link" href="/user">User Page |</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user">User Page |</a>
+                  <a class="nav-link user-button nav-button" href="/logout">Sign out</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                  <a class="nav-link user-button nav-button" href="/sign-up">Sign Up</a>
+                  <a class="nav-link" href="/Login">login page |</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/Login">login page |</a>
+                  <a class="nav-link user-button nav-button" href="/sign-up">Sign Up</a>
                 </li>
                 {% endif %}
               </ul>

@@ -68,7 +68,7 @@ p {
 }
 
 .user-button{
-    position: fixed;
+    position: initial;
     right: 3%;
     background-color: #aeb1c7; /* Green */
     border: none;
