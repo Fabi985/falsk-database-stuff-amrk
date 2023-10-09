@@ -14,7 +14,7 @@
                 <div class="card" style="background-color: grey; border: 0px;" id="img-card user-name-and-profile">
                     <div>
                         <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic" style='justify-items: center;' class="circle-shadow">
-                        <span style="font-size: xx-large; padding-left: 25px;">Hello {{ User_Name }}!<br>Membership type: {{ current_user_membership }}</span> 
+                        <span style="font-size: xx-large; padding-left: 25px;">Hello {{ User_Name }}!</span><br><span style="font-size: x-large;">Membership type: {{ current_user_membership }}</span> 
                     </div>
                 </div>
             </div>
@@ -24,6 +24,11 @@
                     <input type=file name=file>
                     <input type=submit value=Upload>
                 </form>
+            </div>
+            <div style="padding: 50px 100px;">
+                <a href="/logout">
+                    <button class="Log-out-button">Log out</button>
+                </a>
             </div>
         </div>
     {% endif %}

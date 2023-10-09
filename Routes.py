@@ -37,9 +37,10 @@ def upload_file():
             return redirect(url_for('userPage'))
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER']+ "/" + filename))
             user = session.get("user")
             get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+            filename = str(get_user_id[0][0]) + "_user_pic"
+            file.save(os.path.join(app.config['UPLOAD_FOLDER']+ "/" + filename))
             current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
             change_profile_pic = db.updateDB('UPDATE User_Data_TBL SET User_Profile = ? WHERE User_ID = ?', [filename, get_user_id[0][0]])
             return redirect(url_for('userPage'))
@@ -65,7 +66,6 @@ def aboutPage():
     trainers_array = []
     for trainer in trainers:
         trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
-    print(trainer_data)
     user = session.get("user")
     get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
     current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
@@ -118,6 +118,14 @@ def logout():
     session.pop("email", None)
     session.pop("password", None)
     return redirect(url_for("homePage"))
+
+@app.route("/search-user/<string:userSearch>", methods=['GET', 'POST'])
+def searchUser(userSearch):
+    current_user = session.get("user")
+    search = db.queryDB("SELECT * FROM User_Data_TBL WHERE User_Name = ?", [userSearch])
+
+
+    return render_template("search.html", current_user=current_user, search=search)
 
 @app.route("/add", methods=["POST"])
 def add():
