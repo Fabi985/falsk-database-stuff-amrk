@@ -170,3 +170,27 @@ p {
     grid-column-gap: 0px;
     grid-row-gap: 0px
 }
+
+.user-card {
+    width: fit-content; 
+    border-radius: 10px; 
+    background-color: grey;
+    margin: 10px 25px;
+    padding: 10px 10px;
+}
+
+.User-page {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px
+}
+
+.circle-shadow {
+    width: 50px;
+    height: 50px;
+    background-color: #000000;
+    border-radius:50%;
+    box-shadow: 0 0 0 3px #000000;
+}

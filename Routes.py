@@ -1,5 +1,7 @@
 from __main__ import app
-from flask import Flask, render_template, url_for, redirect, request, flash, session
+from flask import Flask, render_template, url_for, redirect, request, flash, session, send_from_directory
+import os
+from werkzeug.utils import secure_filename
 
 # importing this allows access to the database
 from DBConnector import Database
@@ -9,6 +11,43 @@ import hashlib
 
 #defines our database
 db = Database()
+
+UPLOAD_FOLDER = 'static/Profile_pics'
+# Defines databases file types that it allows
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'PNG'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/profile-upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(url_for('userPage'))
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(url_for('userPage'))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER']+ "/" + filename))
+            user = session.get("user")
+            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+            current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+            change_profile_pic = db.updateDB('UPDATE User_Data_TBL SET User_Profile = ? WHERE User_ID = ?', [filename, get_user_id[0][0]])
+            return redirect(url_for('userPage'))
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 # This creates a home page for the user to be sent to if theres nothng in the search bar
 @app.route("/")
@@ -23,7 +62,14 @@ def aboutPage():
     title = "About"
     current_user = session.get("user")
     trainers = db.queryDB('SELECT * FROM Trainer_TBL')
-    return render_template("About.HTML", title = title, current_user=current_user, trainers=trainers)
+    trainers_array = []
+    for trainer in trainers:
+        trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
+    print(trainer_data)
+    user = session.get("user")
+    get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+    current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+    return render_template("About.HTML", title = title, current_user=current_user, trainers=trainer_data)
 
 # This will redirect the user back to the Home page
 @app.route("/home")
@@ -35,8 +81,8 @@ def backToHomePage():
 def userPage():
     title = "User Page"
     user = session.get("user")
-    current_user_membership = session.get("membership")
-    current_user = db.queryDB('SELECT * FROM User_TBL WHERE User_Name = ?', [user])
+    get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+    current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
     return render_template("User.HTML", title = title, current_user=current_user)
 
 # This directs you to the sign up page
@@ -115,13 +161,12 @@ def userLogin():
         user = request.form["nm"]
         password = request.form["pword"]
         hashed_password = hashlib.md5(str(password).encode()).hexdigest()
-        found_user = db.queryDB('SELECT * FROM User_TBL WHERE User_Name = ?', [user])
+        found_user = db.queryDB('SELECT * FROM User_Login_TBL WHERE User_Name = ?', [user])
         if found_user:
             stored_password = found_user[0][2]
             if stored_password == hashed_password:
                 session["user"] = user
                 session["email"] = found_user[0][3]
-                session["membership"] = found_user[0][4]
                 flash("Login sucesful", 'Success')
                 return redirect(url_for("homePage"))
             else:
@@ -150,15 +195,16 @@ def register():
         hashed_email = hashlib.md5(str(email).encode()).hexdigest()
         hashed_password = hashlib.md5(str(password).encode()).hexdigest()
 
-        result = db.queryDB('SELECT * FROM User_TBL WHERE User_Email = ?', [hashed_email])
+        result = db.queryDB('SELECT * FROM User_Login_TBL WHERE User_Email = ?', [hashed_email])
         if result:
             flash("User Email already in use :(", "danger")
             return redirect(url_for("register"))
         else:
-            db.updateDB("INSERT INTO User_TBL (User_Name, User_Pass, User_Email, Membership_Type, User_Profile) VALUES (?,?,?,?,?)", [user, hashed_password, hashed_email, membership_type, Profile_Pic])
-            get_user_id = db.queryDB('SELECT User_ID FROM User_TBL WHERE User_Name = ? ', [user])
+            db.updateDB("INSERT INTO User_Login_TBL (User_Name, User_Pass, User_Email) VALUES (?,?,?)", [user, hashed_password, hashed_email])
+            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+            db.updateDB("INSERT INTO User_Data_TBL (User_ID, User_Name, User_Profile, User_Membership_Type) VALUES (?,?,?,?)", [get_user_id[0][0], user, Profile_Pic, membership_type])
             if membership_type == "Trainer":
-                db.updateDB("INSERT INTO Trainer_TBL (Trainer_Name, Trainer_Profile) VALUES (?,?)", [user, Profile_Pic])
+                db.updateDB("INSERT INTO Trainer_TBL (User_ID) VALUES (?)", [get_user_id[0][0]])
                 
                 flash("signed up trainer", "info")
             else:

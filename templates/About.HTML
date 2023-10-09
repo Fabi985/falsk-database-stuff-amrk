@@ -5,33 +5,39 @@
 
 <body>
     <h2><center>Fitness app User Persoanas</center></h2>
-    <div class="container " id="people-grid-container">
-        {% for trainer in trainers %}
-        {% set Trainer_ID = trainer[0] %}
-        {% set Trainer_Name = trainer[2] %}
-        {% set Trainer_Data = trainer[3] %}
-        {% set Trainer_picture = trainer[4] %}
-        {% set Trainer_Desc = trainer[5] %}
-        <div class="card" style="background-color: black; width: fit-content;" id="people-card-grid">
-            <div class="card-body">
-                <h3 style="color: white;">Trainer {{ Trainer_Name }}</h3>
-                <div class="card" style="background-color: transparent; width: fit-content;">
-                    <img src="../static/Profile_pics/{{ Trainer_picture }}" id="profile-pic">
+    {% if trainers %}
+        <div class="container " id="people-grid-container">
+            {% for trainer in trainers %}
+            {% set trainer_ID = trainer[0] %}
+            {% set trainer_name = trainer[1] %}
+            {% set trainer_picture = trainer[2] %}
+            {% set trainer_Desc = trainer[4] %}
+            {% set trainer_bio = trainer[5] %}
+            <div class="card" style="background-color: black; width: fit-content;" id="people-card-grid">
+                <div class="card-body">
+                    <h3 style="color: white;">Trainer {{ trainer_name }}</h3>
+                    <div class="card" style="background-color: white; width: fit-content; border-radius: 100px;">
+                        <img src="../static/Profile_pics/{{ trainer_picture }}" id="profile-pic">
+                    </div>
+                </div>
+                <div>
+                
+                </div>
+                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                    <h4 id="white">{{ trainer_name }}</h4>
+                    <p id="white">{{ trainer_Desc }}</p>
+                </div>
+                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                    <h4 id="white">Bio</h4>
+                    <p id="white">{{ trainer_bio }}</p>
                 </div>
             </div>
-            <div>
-               
-            </div>
-            <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                <h4 id="white">{{ Trainer_Name }}</h4>
-                <p id="white">{{ Trainer_Desc }}</p>
-            </div>
-            <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                <h4 id="white">Bio</h4>
-                <p id="white">{{ Trainer_Data }}</p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    {% elif trainers != true %}
+        <div class="container" style="margin-top: 150px;">
+            <h3><center>Errrmmm awkward... Theres nothing here!</center></h3>
+        </div>
+    {% endif %}
 </body>
 {% endblock %}

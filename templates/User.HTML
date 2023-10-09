@@ -7,19 +7,23 @@
     {% if current_user %}
         {% set User_ID = current_user[0][0] %}
         {% set User_Name = current_user[0][1] %}
-        {% set current_user_membership = current_user[0][4] %}
-        {% set User_picture = current_user[0][5] %}
-        <div class="card" style="width: fit-content; border-radius: 10px; background-color: grey;" id="user-profile-card">
-            <div class="card" style="background-color: white;" id="img-card user-name-and-profile">
-                <div>
-                    <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic" style='justify-items: center;'>
-                </div>
-                <div>
-                    <h3>Hello {{ User_Name }}! </h3>
+        {% set User_picture = current_user[0][2] %}
+        {% set current_user_membership = current_user[0][3] %}
+        <div class="card User-page" style="height: fit-content; margin: 20px 80px;">
+            <div class="card user-card" id="user-profile-card">
+                <div class="card" style="background-color: grey; border: 0px;" id="img-card user-name-and-profile">
+                    <div>
+                        <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic" style='justify-items: center;' class="circle-shadow">
+                        <span style="font-size: xx-large; padding-left: 25px;">Hello {{ User_Name }}!<br>Membership type: {{ current_user_membership }}</span> 
+                    </div>
                 </div>
             </div>
             <div>
-                <h3>Membership type: {{ current_user_membership }}</h3>
+                <h3>Upload new Profile Picture</h3>
+                <form method=post enctype=multipart/form-data action="/profile-upload">
+                    <input type=file name=file>
+                    <input type=submit value=Upload>
+                </form>
             </div>
         </div>
     {% endif %}
