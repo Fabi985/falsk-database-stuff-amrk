@@ -162,7 +162,7 @@ def register():
                 
                 flash("signed up trainer", "info")
             else:
-                print("user doesnt want to be a trainer")
+                pass
             return render_template('Login.html', title='login', current_user=current_user)
     else:
             return render_template('signUp.html', title='register', current_user=current_user)
