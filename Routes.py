@@ -102,9 +102,12 @@ def aboutPage():
         trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
         trainers_array.append(trainer_data)
     user = session.get("user")
-    get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
-    current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-    return render_template("About.HTML", title = title, current_user=current_user, trainers=trainers_array)
+    if current_user:
+        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+        return render_template("About.HTML", title = title, current_user=current_user, trainers=trainers_array)
+    else:
+        return render_template("About.HTML", title = title, trainers=trainers_array)
 
 # This will redirect the user back to the Home page
 @app.route("/home")
