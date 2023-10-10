@@ -13,9 +13,9 @@
             {% set trainer_picture = trainer[0][2] %}
             {% set trainer_Desc = trainer[0][4] %}
             {% set trainer_bio = trainer[0][5] %}
-            <div class="card" style="background-color: black; width: fit-content;" id="people-card-grid">
+            <div class="card" style="background-color: #8cb98d; width: fit-content;" id="people-card-grid">
                 <div class="card-body">
-                    <h3 style="color: white;">Trainer {{ trainer_name }}</h3>
+                    <h3 id="about-text">Trainer {{ trainer_name }}</h3>
                     <div class="card" style="background-color: white; width: fit-content; border-radius: 100px;">
                         <img src="../static/Profile_pics/{{ trainer_picture }}" id="profile-pic">
                     </div>
@@ -23,13 +23,13 @@
                 <div>
                 
                 </div>
-                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                    <h4 id="white">Bio</h4>
-                    <p id="white">{{ trainer_bio }}</p>
+                <div class="card m-1 p-1" style="background-color: #596f62; height: fit-content;">
+                    <h4 id="about-text">Bio</h4>
+                    <p id="about-text">{{ trainer_bio }}</p>
                 </div>
-                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                    <h4 id="white">{{ trainer_name }}</h4>
-                    <p id="white">{{ trainer_Desc }}</p>
+                <div class="card m-1 p-1" style="background-color: #596f62; height: fit-content;">
+                    <h4 id="about-text">{{ trainer_name }}</h4>
+                    <p id="about-text">{{ trainer_Desc }}</p>
                 </div>
             </div>
             {% endfor %}

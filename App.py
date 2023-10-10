@@ -7,7 +7,7 @@ from datetime import timedelta, datetime
 app = Flask(__name__)
 
 app.secret_key = "hello"
-app.permanent_session_lifetime = timedelta(minutes=1)
+app.permanent_session_lifetime = timedelta(days=31)
 
 
 import Routes

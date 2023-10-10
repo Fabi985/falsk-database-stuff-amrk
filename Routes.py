@@ -134,18 +134,6 @@ def loginPage():
     current_user = session.get("user")
     return render_template("Login.html", title = title, current_user=current_user)
 
-@app.route("/data")
-def data():
-    title = "Data"
-    #check to see if user is logged in
-    current_user = session.get("user")
-
-    # defines books and use a db.query from the dbconnector.property()
-    books = db.queryDB('SELECT * FROM Books_TBL')
-
-    #return our user and books to the data.htrml page
-    return render_template("data.HTML", title = title, books = books, current_user=current_user)
-
 @app.route("/logout")
 def logout():
     current_user = session.get('user')
@@ -162,38 +150,6 @@ def searchUser(userSearch):
 
 
     return render_template("search.html", current_user=current_user, search=search)
-
-@app.route("/add", methods=["POST"])
-def add():
-    current_user = session.get("user")
-    title = request.form.get("title",'')
-    author = request.form.get("author",'')
-
-    db.updateDB("INSERT INTO Books_TBL (title, author) VALUES (?, ?)", [title, author])
-    flash("Book Added Sucesfuly","message")
-
-    return redirect(url_for("data"))
-
-
-@app.route('/delete/<int:Book_ID>', methods=['GET', 'POST'])
-def delete(Book_ID):
-    current_user = session.get("user")
-    book = db.queryDB('SELECT * FROM Books_TBL WHERE Book_ID = ?', [Book_ID])
-    if not book:
-        flash("Book not found!", "danger")
-    else:
-        db.updateDB('DELETE FROM Books_TBL WHERE Book_ID = ?', [Book_ID])
-        flash("Book deleted scufsefuly!", "success")
-    return redirect(url_for('data'))
-
-@app.route("/update/<int:Book_ID>", methods=['GET', 'POST'])
-def update(Book_ID):
-    title = "Update"
-    current_user = session.get("user")
-    book = db.queryDB('SELECT * FROM Books_TBL WHERE Book_ID = ?', [Book_ID])
-
-    return render_template("Update.html", title = title, book = book, current_user=current_user)
-
 
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():

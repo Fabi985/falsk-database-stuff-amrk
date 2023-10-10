@@ -34,40 +34,23 @@
     </script> 
 
 <body>
-    <div class="container"> 
+    <h3 style="text-align: center;">This is a login page</h3> 
+    <div class="login-container"> 
 
-        <form action="/UserLogin" method="POST"> 
-        
-            <h3 style="text-align: center;">This is a login page</h3> 
-        
-                <p style="text-align: center;">User Name</p> 
-        
-                <p style="text-align: center;">
-                    <input type="text" id="nm" name="nm" />
-                </p> 
-        
-                <!-- <p>Email</p> 
-        
-                <p><input type ="text" name ="email"/></p> --> 
-        
-                <p style="text-align: center;">Password</p> 
-        
-                <p style="text-align: center;"> 
-        
-                    <input type="password" id="pword" name="pword" /> 
-        
-                    <button type="button" onclick="togglePassword()">Show</button> <!--call our javascript toggle password --> 
-        
-                </p> 
-        
-                <p style="text-align: center;">
-                    <input type="submit" name="submit" />
-                </p> 
-        
-                <a class="nav-link" href='/sign-up' style="text-align: center;">Need to Register?</a> 
-        
-        </form> 
-        
-        </div> 
+        <div class="center">
+            <div class="flipY">
+                <form action="/UserLogin" method="POST">
+                    <p>Username</p>
+                    <p><input type="text" id="nm" name="nm" size="35px"></p>
+                    <p>Password</p>
+                    <p>
+                        <input type="password" id="pword" name="pword" size="35px">
+                        <button type="button" onclick="togglePassword()">Show</button>
+                    </p>
+                    <p><input type="submit" name="submit"/></p>
+                    <a class="nav-link" href="/register" style="text-align: center; color: black;">Need to Register?</a>
+                </form>
+            </div>
+        </div>
 </body>
 {% endblock %}

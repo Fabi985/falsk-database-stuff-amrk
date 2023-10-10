@@ -1,6 +1,6 @@
 /* style.css */
 body {
-    background-color:#FFEDE1;
+    background-color:#d4ecc8;
     font-family: 'Montserrat', sans-serif;
     font-weight: 100;
 }
@@ -55,8 +55,8 @@ p {
     font-size: 15px;
 }
 
-#white{
-    color: white;
+#about-text{
+    color: black;
 }
 
 .button {
@@ -92,7 +92,7 @@ p {
 .user-button{
     position: initial;
     right: 3%;
-    background-color: #aeb1c7; /* Green */
+    background-color: #8cb98d; /* Green */
     border: none;
     color: white;
     padding: 10px 15px;
@@ -242,4 +242,15 @@ p {
 
 .submit-button {
     font-weight: bold;
+}
+
+.login-container {
+    border: 1px solid black;
+    width: fit-content;
+    block-size: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background: #596f62;
+    padding: 12px;
+    margin-top: 50px;
 }

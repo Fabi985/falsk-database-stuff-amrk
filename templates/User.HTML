@@ -12,7 +12,7 @@
         {% set current_user_membership = current_user[0][3] %}
         {% set User_Desc = current_user[0][4] %}
         {% set User_Bio = current_user[0][5] %}
-        <div class="User-page" style="background-color: white; margin: 50px; padding: 15px 10px;">
+        <div class="User-page" style="background-color: #8cb98d; margin: 50px; padding: 15px 10px;">
             <div class="card" style="background-color: black; width: fit-content; margin: 10px;" id="people-card-grid">
                 <div class="card-body">
                     <div class="card" style="background-color: white; padding: 0%; display: inline-flex; border-radius: 100px;">
@@ -52,7 +52,7 @@
                     <button class="Log-out-button">Log out</button>
                 </a>
             </div>
-            <div class="card" style="margin: 50px;">
+            <div class="card" style="margin: 50px; background-color: #596f62;">
                 <form method=post action="/bio-update"> 
                     <label>User-Bio</label><br>
                     <textarea rows = "7" cols = "40" maxlength="150" type="text" id="bio" name="bio" placeholder="You can update your bio here...">{{ User_Bio }}</textarea>
