@@ -9,16 +9,29 @@
         {% set User_Name = current_user[0][1] %}
         {% set User_picture = current_user[0][2] %}
         {% set current_user_membership = current_user[0][3] %}
-        <div class="card User-page" style="height: fit-content; margin: 20px 80px;">
-            <div class="card user-card" id="user-profile-card">
-                <div class="card" style="background-color: grey; border: 0px;" id="img-card user-name-and-profile">
-                    <div>
-                        <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic" style='justify-items: center;' class="circle-shadow">
-                        <span style="font-size: xx-large; padding-left: 25px;">Hello {{ User_Name }}!</span><br><span style="font-size: x-large;">Membership type: {{ current_user_membership }}</span> 
+        {% set User_Desc = current_user[0][4] %}
+        {% set User_Bio = current_user[0][5] %}
+        <div class="User-page" style="background-color: white; margin: 50px; padding: 15px 10px;">
+            <div class="card" style="background-color: black; width: fit-content; margin: 10px;" id="people-card-grid">
+                <div class="card-body">
+                    <div class="card" style="background-color: white; padding: 0%; display: inline-flex; border-radius: 100px;">
+                        <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic">
                     </div>
                 </div>
+                    <div style="padding: 2px;">
+                        <p style="color: white; font-size: x-large;">Name: {{ User_Name }}</p>
+                        <p style="color: white; font-size: larger;">Membership: {{ current_user_membership }}</p>
+                    </div>
+                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                    <h4 id="white">Bio</h4>
+                    <p id="white">{{ User_Bio }}</p>
+                </div>
+                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                    <h4 id="white">desc</h4>
+                    <p id="white">{{ User_Desc }}</p>
+                </div>
             </div>
-            <div>
+            <div style="margin: 25px;">
                 <h3>Upload new Profile Picture</h3>
                 <form method=post enctype=multipart/form-data action="/profile-upload">
                     <input type=file name=file>
@@ -29,6 +42,22 @@
                 <a href="/logout">
                     <button class="Log-out-button">Log out</button>
                 </a>
+            </div>
+            <div class="card" style="margin: 50px;">
+                <form method=post action="/bio-update"> 
+                    <label>User-Bio</label>
+                    <textarea rows = "7" cols = "40" type="text" id="bio" name="bio" placeholder="You can update your bio here...">{{ User_Bio }}</textarea>
+                    <br>
+                    <input type="submit" value = "submit" />
+                </form>
+            </div>
+            <div class="card" style="margin: 50px;">
+                <form method=post action="/desc-update"> 
+                    <label>User-Desc</label>
+                    <textarea rows = "7" cols = "40" type="text" id="desc" name="desc" placeholder="You can update your Description here...">{{ User_Desc }}</textarea>
+                    <br>
+                    <input type="submit" value = "submit" />
+                </form>
             </div>
         </div>
     {% endif %}

@@ -50,6 +50,40 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 
+@app.route('/bio-update', methods=['GET', 'POST'])
+def bioUpdate():
+    if request.method == 'POST':
+
+        text = request.form["bio"]
+
+        if text in [""," "]:
+            flash('Nothing was written', "Danger")
+            return redirect(url_for('userPage'))
+        else:
+            user = session.get("user")
+            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+            current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+            change_user_bio = db.updateDB('UPDATE User_Data_TBL SET User_Bio = ? WHERE User_ID = ?', [text, get_user_id[0][0]])
+            flash(f'Bio has updated for {user}')
+            return redirect(url_for('userPage'))
+
+@app.route('/desc-update', methods=['GET', 'POST'])
+def descUpdate():
+    if request.method == 'POST':
+
+        text = request.form["desc"]
+
+        if text in [""," "]:
+            flash('Nothing was written', "Danger")
+            return redirect(url_for('userPage'))
+        else:
+            user = session.get("user")
+            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+            current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+            change_user_bio = db.updateDB('UPDATE User_Data_TBL SET User_Desc = ? WHERE User_ID = ?', [text, get_user_id[0][0]])
+            flash(f'Description has updated for {user}')
+            return redirect(url_for('userPage'))
+
 # This creates a home page for the user to be sent to if theres nothng in the search bar
 @app.route("/")
 def homePage():
@@ -66,10 +100,11 @@ def aboutPage():
     trainers_array = []
     for trainer in trainers:
         trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
+        trainers_array.append(trainer_data)
     user = session.get("user")
     get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
     current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-    return render_template("About.HTML", title = title, current_user=current_user, trainers=trainer_data)
+    return render_template("About.HTML", title = title, current_user=current_user, trainers=trainers_array)
 
 # This will redirect the user back to the Home page
 @app.route("/home")
@@ -79,7 +114,7 @@ def backToHomePage():
 
 @app.route("/user")
 def userPage():
-    title = "User Page"
+    title = "User"
     user = session.get("user")
     get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
     current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])

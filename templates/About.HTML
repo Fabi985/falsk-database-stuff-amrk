@@ -8,11 +8,11 @@
     {% if trainers %}
         <div class="container " id="people-grid-container">
             {% for trainer in trainers %}
-            {% set trainer_ID = trainer[0] %}
-            {% set trainer_name = trainer[1] %}
-            {% set trainer_picture = trainer[2] %}
-            {% set trainer_Desc = trainer[4] %}
-            {% set trainer_bio = trainer[5] %}
+            {% set trainer_ID = trainer[0][0] %}
+            {% set trainer_name = trainer[0][1] %}
+            {% set trainer_picture = trainer[0][2] %}
+            {% set trainer_Desc = trainer[0][4] %}
+            {% set trainer_bio = trainer[0][5] %}
             <div class="card" style="background-color: black; width: fit-content;" id="people-card-grid">
                 <div class="card-body">
                     <h3 style="color: white;">Trainer {{ trainer_name }}</h3>
@@ -24,12 +24,12 @@
                 
                 </div>
                 <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                    <h4 id="white">{{ trainer_name }}</h4>
-                    <p id="white">{{ trainer_Desc }}</p>
-                </div>
-                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
                     <h4 id="white">Bio</h4>
                     <p id="white">{{ trainer_bio }}</p>
+                </div>
+                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                    <h4 id="white">{{ trainer_name }}</h4>
+                    <p id="white">{{ trainer_Desc }}</p>
                 </div>
             </div>
             {% endfor %}

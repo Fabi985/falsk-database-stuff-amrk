@@ -5,12 +5,32 @@ body {
     font-weight: 100;
 }
 
-.video-container {
-    float: right;
-    padding-right: 10%;
-    height: 1%;
-    position: fixed;
-    right: 5%;
+.video-container{
+    width: 100%;
+    height: 100%;
+}
+      
+iframe {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 100vw;
+height: 100vh;
+transform: translate(-50%, -50%);
+}
+
+@media (min-aspect-ratio: 16/9) {
+.video-container iframe {
+    /* height = 100 * (9 / 16) = 56.25 */
+    height: 56.25vw;
+}
+}
+      
+@media (max-aspect-ratio: 16/9) {
+.video-container iframe {
+    /* width = 100 / (9 / 16) = 177.777777 */
+    width: 177.78vh;
+}
 }
 
 h1 {
@@ -209,4 +229,17 @@ p {
 
 .Log-out-button:hover {
     background-color: rgb(205, 61, 61);
+}
+
+.choose-file-button {
+    background-color: rgb(10,102,194); 
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    padding: 7px 50px 7px 50px;
+}
+
+.submit-button {
+    font-weight: bold;
 }
