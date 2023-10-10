@@ -187,6 +187,8 @@ def register():
     current_user = session.get('user')
     if request.method == "POST":
         user = request.form["nm"]
+        first_name = request.form["fnm"]
+        last_name = request.form["lnm"]
         password = request.form["pword"]
         email = request.form["email"]
         membership_type = request.form["mtype"]
@@ -199,10 +201,16 @@ def register():
         if result:
             flash("User Email already in use :(", "danger")
             return redirect(url_for("register"))
+        elif [user, first_name, last_name, password, email] in [" ", ""]:
+            flash("Some required data may be missing!", "danger")
+            return redirect(url_for("register"))
+        elif first_name.isdigit() == True or last_name.isdigit() == True:
+            flash("Personal names cannot be numbers!", "danger")
+            return redirect(url_for("register"))
         else:
             db.updateDB("INSERT INTO User_Login_TBL (User_Name, User_Pass, User_Email) VALUES (?,?,?)", [user, hashed_password, hashed_email])
             get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
-            db.updateDB("INSERT INTO User_Data_TBL (User_ID, User_Name, User_Profile, User_Membership_Type) VALUES (?,?,?,?)", [get_user_id[0][0], user, Profile_Pic, membership_type])
+            db.updateDB("INSERT INTO User_Data_TBL (User_ID, User_Name, User_Profile, User_Membership_Type, User_First_Name, User_Last_Name) VALUES (?,?,?,?,?,?)", [get_user_id[0][0], user, Profile_Pic, membership_type, first_name, last_name])
             if membership_type == "Trainer":
                 db.updateDB("INSERT INTO Trainer_TBL (User_ID) VALUES (?)", [get_user_id[0][0]])
                 
