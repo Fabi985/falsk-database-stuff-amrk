@@ -89,10 +89,16 @@ def homePage():
     current_user = session.get("user")
     return render_template("Index.HTML", title = title, current_user=current_user)
 
-# If /about is typed into search bar then it will send the user to an about page
 @app.route("/about")
 def aboutPage():
     title = "About"
+    current_user = session.get("user")
+    return render_template("About.html", title = title, current_user=current_user)
+
+# If /trainers is typed into search bar then it will send the user to the trainers page
+@app.route("/trainers")
+def trainerPage():
+    title = "Trainer Personas"
     current_user = session.get("user")
     trainers = db.queryDB('SELECT * FROM Trainer_TBL')
     trainers_array = []
@@ -103,9 +109,9 @@ def aboutPage():
     if current_user:
         get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
         current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-        return render_template("About.HTML", title = title, current_user=current_user, trainers=trainers_array)
+        return render_template("Trainer.html", title = title, current_user=current_user, trainers=trainers_array)
     else:
-        return render_template("About.HTML", title = title, trainers=trainers_array)
+        return render_template("Trainer.html", title = title, trainers=trainers_array)
 
 # This will redirect the user back to the Home page
 @app.route("/home")
