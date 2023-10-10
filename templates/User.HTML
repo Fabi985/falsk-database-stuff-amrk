@@ -27,7 +27,7 @@
                     <h4 id="white">Bio</h4>
                     {% if User_Bio %}
                         <p id="white">{{ User_Bio }}</p>
-                    {% elif User_Bio in [' ', ''] %}
+                    {% elif User_Bio in [' ', '', 'none'] %}
                         <p id="white">{{ User_Name }} has no Bio currently!</p>
                     {% endif %}
                 </div>
@@ -35,7 +35,7 @@
                     <h4 id="white">desc</h4>
                     {% if User_Desc %}
                         <p id="white">{{ User_Desc }}</p>
-                    {% elif User_Desc in [' ', ''] %}
+                    {% elif User_Desc in [' ', '', 'none'] %}
                     <p id="white">{{ User_Name }} has no description currently!</p>
                     {% endif %}
                 </div>
