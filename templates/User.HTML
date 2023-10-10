@@ -2,6 +2,7 @@
 {% block title %}{{title}} Page{% endblock %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user-stylesheet.css')}}">
 <script src="text-area-counter.js"></script>
 
 <body>
@@ -12,6 +13,8 @@
         {% set current_user_membership = current_user[0][3] %}
         {% set User_Desc = current_user[0][4] %}
         {% set User_Bio = current_user[0][5] %}
+        {% set User_First_Name = current_user[0][6] %}
+        {% set User_Last_Name = current_user[0][7] %}
         <div class="User-header">
             <div class="container-header">
                 <div class="img-header" style="background-color: white; padding: 0%; display: inline-flex; border-radius: 100px;">
@@ -19,75 +22,118 @@
                 </div>
                 <div class="user-header-info">
                     <div>
-                        <h2>Firstname Lastname</h2>
+                        <h2>{{User_First_Name}} {{User_Last_Name}}</h2>
                         <h4>@{{ User_Name }}</h4>
                     </div>
                     <div>
                         <h3>Membership: {{ current_user_membership }}</h3>
                     </div>
                 </div>
+                <div style="padding-left: 600px; position: relative;">
+                    <a href="/logout">
+                        <button class="Log-out-button">Log out</button>
+                    </a>
+                </div>
               </div>
         </div>
-        <div class="User-page" style="background-color: #8cb98d; margin: 50px; padding: 15px 10px;">
-            <div class="card" style="background-color: black; width: fit-content; margin: 10px;" id="people-card-grid">
-                <div class="card-body">
-                    <div class="card" style="background-color: white; padding: 0%; display: inline-flex; border-radius: 100px;">
-                        <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic">
+        <div class="select-header">
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Health')" id="defaultOpen">User Health</button>
+                <button class="tablinks" onclick="openCity(event, 'Update')">Update User Profile</button>
+            </div>
+            <!-- Tab content -->
+            <div id="Health" class="tabcontent">
+                <h3>uhhhh...</h3>
+                <h4>Somewhat sane ig</h4>
+            </div>
+                
+            <div id="Update" class="tabcontent">
+                <div class="user-data" id="#update">
+                    <div class="user-data-grid">
+                        <div>
+                            <h3>Preview</h3>
+                            <div class="card" style="background-color: black; width: fit-content; margin: 10px;" id="people-card-grid">
+                                <div class="card-body">
+                                    <div class="card" style="background-color: white; padding: 0%; display: inline-flex; border-radius: 100px;">
+                                        <img src="../static/Profile_pics/{{ User_picture }}" id="profile-pic">
+                                    </div>
+                                </div>
+                                    <div style="padding: 2px;">
+                                        <p style="color: white; font-size: x-large;">Name: {{ User_Name }}</p>
+                                        <p style="color: white; font-size: larger;">Membership: {{ current_user_membership }}</p>
+                                    </div>
+                                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                                    <h4 id="white">Bio</h4>
+                                    {% if User_Bio %}
+                                        <p id="white">{{ User_Bio }}</p>
+                                    {% elif User_Bio in [' ', '', 'none'] %}
+                                        <p id="white">{{ User_Name }} has no Bio currently!</p>
+                                    {% endif %}
+                                </div>
+                                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
+                                    <h4 id="white">desc</h4>
+                                    {% if User_Desc %}
+                                        <p id="white">{{ User_Desc }}</p>
+                                    {% elif User_Desc in [' ', '', 'none'] %}
+                                    <p id="white">{{ User_Name }} has no description currently!</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>User Bio</h3>
+                            <form method=post action="/bio-update"> 
+                                <textarea rows = "7" cols = "40" maxlength="150" type="text" id="bio" name="bio" placeholder="You can update your bio here...">{{ User_Bio }}</textarea>
+                                <br>
+                                <input type="submit" value = "submit" />
+                            </form>
+                        </div>
+                        <div>
+                            <h3>User Description</h3>
+                            <form method=post action="/desc-update"> 
+                                <textarea rows = "7" cols = "40" maxlength="150" type="text" id="desc" name="desc" placeholder="You can update your Description here...">{{ User_Desc }}</textarea>
+                                <br>
+                                <input type="submit" value = "submit" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="User-page" style="background-color: #8cb98d; margin: 50px; padding: 15px 10px;">
+                        <div style="margin: 25px;">
+                            <h3>Upload new Profile Picture</h3>
+                            <form method=post enctype=multipart/form-data action="/profile-upload">
+                                <input type=file name=file>
+                                <input type=submit value=Upload>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                    <div style="padding: 2px;">
-                        <p style="color: white; font-size: x-large;">Name: {{ User_Name }}</p>
-                        <p style="color: white; font-size: larger;">Membership: {{ current_user_membership }}</p>
-                    </div>
-                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                    <h4 id="white">Bio</h4>
-                    {% if User_Bio %}
-                        <p id="white">{{ User_Bio }}</p>
-                    {% elif User_Bio in [' ', '', 'none'] %}
-                        <p id="white">{{ User_Name }} has no Bio currently!</p>
-                    {% endif %}
-                </div>
-                <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
-                    <h4 id="white">desc</h4>
-                    {% if User_Desc %}
-                        <p id="white">{{ User_Desc }}</p>
-                    {% elif User_Desc in [' ', '', 'none'] %}
-                    <p id="white">{{ User_Name }} has no description currently!</p>
-                    {% endif %}
-                </div>
             </div>
-            <div style="margin: 25px;">
-                <h3>Upload new Profile Picture</h3>
-                <form method=post enctype=multipart/form-data action="/profile-upload">
-                    <input type=file name=file>
-                    <input type=submit value=Upload>
-                </form>
-            </div>
-            <div style="padding: 50px 100px;">
-                <a href="/logout">
-                    <button class="Log-out-button">Log out</button>
-                </a>
-            </div>
-            <div class="card" style="margin: 50px; background-color: #596f62;">
-                <form method=post action="/bio-update"> 
-                    <label>User-Bio</label><br>
-                    <textarea rows = "7" cols = "40" maxlength="150" type="text" id="bio" name="bio" placeholder="You can update your bio here...">{{ User_Bio }}</textarea>
-                    <div id="the-count">
-                        <span id="current">0</span>
-                        <span id="maximum">/150</span>
-                    </div>
-                    <br>
-                    <input type="submit" value = "submit" />
-                </form>
-            </div>
-            <div class="card" style="margin: 50px;">
-                <form method=post action="/desc-update"> 
-                    <label>User-Desc</label><br>
-                    <textarea rows = "7" cols = "40" maxlength="150" type="text" id="desc" name="desc" placeholder="You can update your Description here...">{{ User_Desc }}</textarea>
-                    <br>
-                    <input type="submit" value = "submit" />
-                </form>
-            </div>
+
+            <script>
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+            
+            function openCity(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+              
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+                }
+              
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+              
+                // Show the current tab, and add an "active" class to the button that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            </script>
         </div>
     {% endif %}
     

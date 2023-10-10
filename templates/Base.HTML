@@ -3,54 +3,23 @@
     <head>
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar-style.css')}}">
       <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3f6634;">
-            <a class="navbar-brand" href="/home">Toka Fitness</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                {% if title == "Home" %}
-                  <li class="nav-item active">
-                    <a class="nav-link" href="/home">Home |<span class="sr-only">(current)</span></a>
-                  </li>
-                {% elif title != "Home" %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="/home">Home |</a>
-                  </li>
-                {% endif %}
-                {% if title != "About" %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="/about">About |</a>
-                  </li>
-                {% elif title == "About" %}
-                  <li class="nav-item active">
-                    <a class="nav-link" href="/about">About |<span class="sr-only">(current)</span></a>
-                  </li>
-                {% endif %}
-                {% if current_user %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/user">User Page |</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link user-button nav-button" href="/logout">Sign out</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/Login">login page |</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link user-button nav-button" href="/sign-up">Sign Up</a>
-                </li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+            {% if current_user %}
+              <li><a href="/user">User page</a></li>
+              <li style="float:right"><a class="logout" href="/logout">Logout</a></li>
+            {% else %}
+              <li><a href="/Login">Login</a></li>
+              <li style="float:right"><a class="signup" href="/sign-up">Sign up</a></li>
+            {% endif %}
+          </ul>
 
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

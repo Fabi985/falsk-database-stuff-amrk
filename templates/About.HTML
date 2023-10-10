@@ -13,9 +13,11 @@
             {% set trainer_picture = trainer[0][2] %}
             {% set trainer_Desc = trainer[0][4] %}
             {% set trainer_bio = trainer[0][5] %}
+            {% set trainer_firstname = trainer[0][6] %}
+            {% set trainer_lastname = trainer[0][7] %}
             <div class="card" style="background-color: #8cb98d; width: fit-content;" id="people-card-grid">
                 <div class="card-body">
-                    <h3 id="about-text">Trainer {{ trainer_name }}</h3>
+                    <h3 id="about-text">Trainer {{ trainer_firstname }}</h3>
                     <div class="card" style="background-color: white; width: fit-content; border-radius: 100px;">
                         <img src="../static/Profile_pics/{{ trainer_picture }}" id="profile-pic">
                     </div>
@@ -28,7 +30,7 @@
                     <p id="about-text">{{ trainer_bio }}</p>
                 </div>
                 <div class="card m-1 p-1" style="background-color: #596f62; height: fit-content;">
-                    <h4 id="about-text">{{ trainer_name }}</h4>
+                    <h4 id="about-text">{{ trainer_firstname }} {{trainer_lastname}}</h4>
                     <p id="about-text">{{ trainer_Desc }}</p>
                 </div>
             </div>
