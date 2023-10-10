@@ -12,6 +12,22 @@
         {% set current_user_membership = current_user[0][3] %}
         {% set User_Desc = current_user[0][4] %}
         {% set User_Bio = current_user[0][5] %}
+        <div class="User-header">
+            <div class="container-header">
+                <div class="img-header" style="background-color: white; padding: 0%; display: inline-flex; border-radius: 100px;">
+                    <img src="../static/Profile_pics/{{ User_picture }}" id="user-header-profile-pic">
+                </div>
+                <div class="user-header-info">
+                    <div>
+                        <h2>Firstname Lastname</h2>
+                        <h4>@{{ User_Name }}</h4>
+                    </div>
+                    <div>
+                        <h3>Membership: {{ current_user_membership }}</h3>
+                    </div>
+                </div>
+              </div>
+        </div>
         <div class="User-page" style="background-color: #8cb98d; margin: 50px; padding: 15px 10px;">
             <div class="card" style="background-color: black; width: fit-content; margin: 10px;" id="people-card-grid">
                 <div class="card-body">
