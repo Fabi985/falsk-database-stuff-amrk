@@ -2,6 +2,7 @@
 {% block title %}{{title}} Page{% endblock %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<script src="text-area-counter.js"></script>
 
 <body>
     {% if current_user %}
@@ -24,11 +25,19 @@
                     </div>
                 <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
                     <h4 id="white">Bio</h4>
-                    <p id="white">{{ User_Bio }}</p>
+                    {% if User_Bio %}
+                        <p id="white">{{ User_Bio }}</p>
+                    {% elif User_Bio in [' ', ''] %}
+                        <p id="white">{{ User_Name }} has no Bio currently!</p>
+                    {% endif %}
                 </div>
                 <div class="card m-1 p-1" style="background-color: grey; height: fit-content;">
                     <h4 id="white">desc</h4>
-                    <p id="white">{{ User_Desc }}</p>
+                    {% if User_Desc %}
+                        <p id="white">{{ User_Desc }}</p>
+                    {% elif User_Desc in [' ', ''] %}
+                    <p id="white">{{ User_Name }} has no description currently!</p>
+                    {% endif %}
                 </div>
             </div>
             <div style="margin: 25px;">
@@ -46,7 +55,11 @@
             <div class="card" style="margin: 50px;">
                 <form method=post action="/bio-update"> 
                     <label>User-Bio</label><br>
-                    <textarea rows = "7" cols = "40" type="text" id="bio" name="bio" placeholder="You can update your bio here...">{{ User_Bio }}</textarea>
+                    <textarea rows = "7" cols = "40" maxlength="150" type="text" id="bio" name="bio" placeholder="You can update your bio here...">{{ User_Bio }}</textarea>
+                    <div id="the-count">
+                        <span id="current">0</span>
+                        <span id="maximum">/150</span>
+                    </div>
                     <br>
                     <input type="submit" value = "submit" />
                 </form>
@@ -54,7 +67,7 @@
             <div class="card" style="margin: 50px;">
                 <form method=post action="/desc-update"> 
                     <label>User-Desc</label><br>
-                    <textarea rows = "7" cols = "40" type="text" id="desc" name="desc" placeholder="You can update your Description here...">{{ User_Desc }}</textarea>
+                    <textarea rows = "7" cols = "40" maxlength="150" type="text" id="desc" name="desc" placeholder="You can update your Description here...">{{ User_Desc }}</textarea>
                     <br>
                     <input type="submit" value = "submit" />
                 </form>

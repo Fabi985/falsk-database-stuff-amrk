@@ -24,16 +24,17 @@ def allowed_file(filename):
 
 @app.route('/profile-upload', methods=['GET', 'POST'])
 def upload_file():
+    current_user = session.get("user")
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
+            flash('No file part', "danger")
             return redirect(url_for('userPage'))
         file = request.files['file']
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
+            flash('No selected file',"danger")
             return redirect(url_for('userPage'))
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -43,6 +44,8 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER']+ "/" + filename))
             current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
             change_profile_pic = db.updateDB('UPDATE User_Data_TBL SET User_Profile = ? WHERE User_ID = ?', [filename, get_user_id[0][0]])
+
+            flash(f"{current_user[0][1]}'s profile has been updated!","Success")
             return redirect(url_for('userPage'))
 
 @app.route('/uploads/<filename>')
@@ -56,16 +59,13 @@ def bioUpdate():
 
         text = request.form["bio"]
 
-        if text in [""," "]:
-            flash('Nothing was written', "Danger")
-            return redirect(url_for('userPage'))
-        else:
-            user = session.get("user")
-            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
-            current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-            change_user_bio = db.updateDB('UPDATE User_Data_TBL SET User_Bio = ? WHERE User_ID = ?', [text, get_user_id[0][0]])
-            flash(f'Bio has updated for {user}')
-            return redirect(url_for('userPage'))
+        
+        user = session.get("user")
+        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+        change_user_bio = db.updateDB('UPDATE User_Data_TBL SET User_Bio = ? WHERE User_ID = ?', [text, get_user_id[0][0]])
+        flash(f'Bio has updated for {user}!')
+        return redirect(url_for('userPage'))
 
 @app.route('/desc-update', methods=['GET', 'POST'])
 def descUpdate():
@@ -73,16 +73,14 @@ def descUpdate():
 
         text = request.form["desc"]
 
-        if text in [""," "]:
-            flash('Nothing was written', "Danger")
-            return redirect(url_for('userPage'))
-        else:
-            user = session.get("user")
-            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
-            current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-            change_user_bio = db.updateDB('UPDATE User_Data_TBL SET User_Desc = ? WHERE User_ID = ?', [text, get_user_id[0][0]])
-            flash(f'Description has updated for {user}')
-            return redirect(url_for('userPage'))
+        
+        user = session.get("user")
+        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+        change_user_bio = db.updateDB('UPDATE User_Data_TBL SET User_Desc = ? WHERE User_ID = ?', [text, get_user_id[0][0]])
+        flash(f'Description has updated for {user}!')
+
+        return redirect(url_for('userPage'))
 
 # This creates a home page for the user to be sent to if theres nothng in the search bar
 @app.route("/")
@@ -213,13 +211,13 @@ def userLogin():
             if stored_password == hashed_password:
                 session["user"] = user
                 session["email"] = found_user[0][3]
-                flash("Login sucesful", 'Success')
+                flash(f"{found_user[0][1]} has been logged in!", 'Success')
                 return redirect(url_for("homePage"))
             else:
-                flash("Incorect", "danger")
+                flash("Please make sure that you have typed the right password!", "danger")
                 return render_template("Login.html", title = title, current_user=current_user)
         else:
-            flash("user not found", 'danger') 
+            flash("User not found!", 'danger') 
             return render_template("Login.html", title = title, current_user=current_user)
     if current_user in session:
         flash("Already logged in!", "info")
