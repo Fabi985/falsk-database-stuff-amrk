@@ -87,13 +87,24 @@ def descUpdate():
 def homePage():
     title = "Home"
     current_user = session.get("user")
-    return render_template("Index.HTML", title = title, current_user=current_user)
+    if current_user:
+        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
+        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+        return render_template("Index.HTML", title = title, current_user=current_user)
+    else:
+        return render_template("Index.HTML", title = title)
+        
 
 @app.route("/about")
 def aboutPage():
     title = "About"
     current_user = session.get("user")
-    return render_template("About.html", title = title, current_user=current_user)
+    if current_user:
+        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
+        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
+        return render_template("About.html", title = title, current_user=current_user)
+    else:
+        return render_template("About.html", title = title)
 
 # If /trainers is typed into search bar then it will send the user to the trainers page
 @app.route("/trainers")

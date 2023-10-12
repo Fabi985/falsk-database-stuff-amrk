@@ -14,7 +14,7 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 14px 20px;
     text-decoration: none;
 }
   
@@ -42,4 +42,10 @@ li a:hover {
 
 .signup:hover {
     background-color: #3e859d;
+}
+
+#navbar-pfp {
+    max-width: 24px;
+    max-height: 24px;
+    border-radius: 100%;
 }
