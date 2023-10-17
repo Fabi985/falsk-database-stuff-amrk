@@ -88,8 +88,6 @@ def homePage():
     title = "Home"
     current_user = session.get("user")
     if current_user:
-        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
-        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
         return render_template("Index.HTML", title = title, current_user=current_user)
     else:
         return render_template("Index.HTML", title = title)
@@ -100,8 +98,6 @@ def aboutPage():
     title = "About"
     current_user = session.get("user")
     if current_user:
-        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
-        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
         return render_template("About.html", title = title, current_user=current_user)
     else:
         return render_template("About.html", title = title)
@@ -118,8 +114,6 @@ def trainerPage():
         trainers_array.append(trainer_data)
     user = session.get("user")
     if current_user:
-        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
-        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
         return render_template("Trainer.html", title = title, current_user=current_user, trainers=trainers_array)
     else:
         return render_template("Trainer.html", title = title, trainers=trainers_array)
@@ -134,33 +128,26 @@ def backToHomePage():
 def userPage():
     title = "User"
     user = session.get("user")
-    get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
-    current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-    return render_template("User.HTML", title = title, current_user=current_user)
+    return render_template("User.HTML", title = title, current_user=user)
 
 # This directs you to the sign up page
 @app.route("/sign-up")
 def signUpPage():
     title = "Sign Up"
     current_user = session.get('user')
-    if current_user:
-        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
-        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
     return render_template("signUp.HTML", title = title, current_user=current_user)
 
 @app.route("/Login")
 def loginPage():
     title = "Login"
     current_user = session.get("user")
-    current_user = session.get("user")
     if current_user:
-        get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
-        current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-        session["user"] = current_user
         flash('User is already logged in, log out to continue!', 'danger')
         return redirect(url_for("homePage"))
-    else:
+    elif current_user == False:
         return render_template("Login.HTML", title = title, current_user=current_user)
+    else:
+        return redirect(url_for("homePage"))
 
 @app.route("/logout")
 def logout():
@@ -251,5 +238,5 @@ def register():
                 pass
             return render_template('Login.html', title='login', current_user=current_user)
     else:
-            return render_template('signUp.html', title='register', current_user=current_user)
+            return redirect(url_for("signUpPage"))
     
