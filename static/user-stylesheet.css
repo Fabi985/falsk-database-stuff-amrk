@@ -9,7 +9,6 @@
 .user-data{
     margin: 5px 5px;
     padding: 25px 15px;
-    border: 1px solid black;
     background-color: #8cb98d;
     border-radius: 3px;
 }
@@ -47,7 +46,6 @@
 
 .select-header {
     margin: 10px 90px;
-    padding: 25px 15px;
     border: 1px solid black;
     background-color: #8cb98d;
     border-radius: 3px;

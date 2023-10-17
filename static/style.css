@@ -3,6 +3,8 @@ body {
     background-color:#d4ecc8;
     font-family: 'Montserrat', sans-serif;
     font-weight: 100;
+    display: table;
+    width: 100%; 
 }
 
 .container-header {
@@ -155,7 +157,7 @@ p {
 #people-grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 20px
 }
@@ -188,7 +190,7 @@ p {
 #people-card-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px
 }
@@ -267,8 +269,65 @@ p {
     block-size: fit-content;
     margin-left: auto;
     margin-right: auto;
-    background: #596f62;
+    background: #8cb98d;
     padding: 12px;
     margin-top: 50px;
 }
 
+.footer {
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #8cb98d;
+    color: #000000;
+    text-align: center;
+    padding: 15px 15px;
+  }
+
+  .footer2 {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #8cb98d;
+    color: #000000;
+    text-align: center;
+    padding: 15px 15px;
+  }
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.sign-up-page-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.picture-frame {
+    width: fit-content;
+    justify-items: center;
+    margin-left: 250px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.footer-link{
+    color: #2e2d2d;
+    text-decoration: none;
+}
+
+.footer-link:hover{
+    color: rgb(100, 100, 100);
+    text-decoration: none;
+}
+
+.footer-title {
+    color: #2e2d2d;
+}

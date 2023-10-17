@@ -38,8 +38,8 @@
         </div>
         <div class="select-header">
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'Health')" id="defaultOpen">User Health</button>
-                <button class="tablinks" onclick="openCity(event, 'Update')">Update User Profile</button>
+                <button class="tablinks" onclick="openTab(event, 'Health')" id="defaultOpen">User Health</button>
+                <button class="tablinks" onclick="openTab(event, 'Update')">Update User Profile</button>
             </div>
             <!-- Tab content -->
             <div id="Health" class="tabcontent">
@@ -113,7 +113,7 @@
             // Get the element with id="defaultOpen" and click on it
             document.getElementById("defaultOpen").click();
             
-            function openCity(evt, cityName) {
+            function openTab(evt, UserContent) {
                 // Declare all variables
                 var i, tabcontent, tablinks;
               
@@ -130,7 +130,7 @@
                 }
               
                 // Show the current tab, and add an "active" class to the button that opened the tab
-                document.getElementById(cityName).style.display = "block";
+                document.getElementById(UserContent).style.display = "block";
                 evt.currentTarget.className += " active";
             }
             </script>

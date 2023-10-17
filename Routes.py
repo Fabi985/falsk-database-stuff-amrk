@@ -142,14 +142,11 @@ def userPage():
 @app.route("/sign-up")
 def signUpPage():
     title = "Sign Up"
-    current_user = session.get("user")
+    current_user = session.get('user')
     if current_user:
         get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
         current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-        flash('No', 'danger')
-        return render_template("Index.HTML", title = title, current_user=current_user)
-    else:
-        return render_template("signUp.HTML", title = title, current_user=current_user)
+    return render_template("signUp.HTML", title = title, current_user=current_user)
 
 @app.route("/Login")
 def loginPage():
@@ -159,8 +156,9 @@ def loginPage():
     if current_user:
         get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [current_user])
         current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
-        flash('No', 'danger')
-        return render_template("Index.HTML", title = title, current_user=current_user)
+        session["user"] = current_user
+        flash('User is already logged in, log out to continue!', 'danger')
+        return redirect(url_for("homePage"))
     else:
         return render_template("Login.HTML", title = title, current_user=current_user)
 
