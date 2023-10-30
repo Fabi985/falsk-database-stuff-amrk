@@ -43,24 +43,33 @@ transform: translate(-50%, -50%);
 
 h1 {
     font-size: 52px;
+    font-size: 2vw;
     /* text-shadow: 0 0 3px #09ff00, 0 0 5px #0000ff;
     color: #09ff00; */
 }
 
 h2 {
     font-size: 48px;
+    font-size: 2vw;
 }
 
 h3 {
     font-size: 36px;
+    font-size: 2vw;
 }
 
 h4 {
     font-size: 28px;
+    font-size: 2vw;
+}
+
+h5 {
+    font-size: 1vw;
 }
 
 p {
     font-size: 15px;
+    font-size: 1vw;
 }
 
 #about-text{
@@ -325,9 +334,91 @@ p {
 
 .footer-link:hover{
     color: rgb(100, 100, 100);
-    text-decoration: none;
+    text-decoration: underline;
+    /* text-shadow: 1px 1px 1px grey; */
+}
+
+.footer-socials {
+    width: 50px;
+    margin-left: 10px;
+    transition: 0.15s ease-in-out;
+}
+
+.footer-socials:hover {
+    width: 55px;
 }
 
 .footer-title {
     color: #2e2d2d;
+}
+
+/* .tag {
+    float: right;
+    position:relative;
+} */
+
+.home-page-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 1100px;
+    max-height: 450px;
+    box-shadow: inset;
+    border-radius: 5%;
+    box-shadow: 1px 1px;
+}
+
+.home-page-text {
+    display: block;
+    background-color: #8cb98d; 
+    border-radius: 10px;
+    width: fit-content;
+    overflow-wrap: anywhere;
+    height: auto;
+    margin: 50px 0px 50px 50px;
+    padding: 40px;
+    box-shadow: 10px 10px;
+    float: left;
+}
+
+.home-page-text-2 {
+    display: block;
+    background-color: #8cb98d; 
+    border-radius: 10px;
+    width: fit-content;
+    height: auto;
+    margin: 50px 0px 50px 50px;
+    padding: 40px;
+    box-shadow: 10px 10px;
+    margin-left: auto;
+   
+}
+
+.booking-button {
+    background-color: teal; 
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    padding: 7px 50px 7px 50px;
+    transition: 0.20s ease-in-out;
+    font-size: 0.8vw;
+}
+
+.booking-button:hover {
+    background-color: rgb(0, 87, 87); 
+    box-shadow: 5px 5px;
+}
+
+.home-page-grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+    padding: 3vw;
+}
+
+.home-page-link {
+    text-decoration: underline;
+    color: teal;
 }

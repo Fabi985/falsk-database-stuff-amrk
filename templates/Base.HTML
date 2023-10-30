@@ -33,31 +33,43 @@
                 {% endfor %}
             {% endif %}
           {% endwith %}
-
         <p>{% block content %}{% endblock %}</p>
-        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" %}
+        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" %}
           <div class="footer2">      
         {% else %}
           <div class="footer">
         {% endif %}
           <footer>
             <div class="footer-grid">
-              <div style="text-align: left; align-items:baseline;">
-                <h4 class="footer-title"><b>Toka Fitness</b></h4>
+              <div style="text-align: left; align-items:baseline; padding-left: 80px; padding-top: 40px;">
+                <h4 class="footer-title"><b>Toka Fitness <span><u>Links</u></span></b></h4>
                 <a href="/" class="footer-link">Home page</a><br>
                 <a href="/about"  class="footer-link">About page</a><br>
                 <a href="/trainers"  class="footer-link">Fitness personas</a><br>
                 <a href="/sign-up"  class="footer-link">Don't have an account?</a><br>
               </div>
-              <div style="text-align: left;">
-                <h4 class="footer-title"><b>Social media</b></h4>
-                <a href="/"  class="footer-link">Social Media link 1 |</a>
-                <a href="/"  class="footer-link">Social Media link 2 |</a>
-                <a href="/"  class="footer-link">Social Media link 3 </a>
-                <br><br><br><br>
-                <p>© 2023 Toka Fitness; user contributions<br>
-                  licensed under CC BY-SA. rev 2023.10.16.43678</p>
+              <div style="padding-top: 50px;">
+                <center>
+                <h4 class="footer-title"><b>Social media links</b></h4>
+                <a href="https://facebook.com"  class="footer-link">
+                  <img src="static/social media icons/facebook.png" class="footer-socials">
+                </a>
+                <a href="https://instagram.com"  class="footer-link">
+                  <img src="static/social media icons/instagram.png" class="footer-socials">
+                </a>
+                <a href="https://twitter.com"  class="footer-link">
+                  <img src="static/social media icons/twitter.png" class="footer-socials">
+                </a>
+                <a href="https://youtube.com"  class="footer-link">
+                  <img src="static/social media icons/youtube.png" class="footer-socials">
+                </a>
+                <a href="https://gmail.com"  class="footer-link">
+                  <img src="static/social media icons/social.png" class="footer-socials">
+                </a>
+                </center>
               </div>
+              <p><center>© 2023 Toka Fitness; user contributions<br>
+                licensed under CC BY-SA. rev 2023.10.16.43678</center></p>
             </div>
           </footer>
         </div>

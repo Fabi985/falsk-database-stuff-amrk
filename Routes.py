@@ -147,7 +147,7 @@ def loginPage():
     elif current_user == False:
         return render_template("Login.HTML", title = title, current_user=current_user)
     else:
-        return redirect(url_for("homePage"))
+        return render_template("Login.HTML", title = title, current_user=current_user)
 
 @app.route("/logout")
 def logout():
@@ -180,7 +180,7 @@ def userLogin():
         if found_user:
             stored_password = found_user[0][2]
             if stored_password == hashed_password:
-                session["user"] = user
+                session["user"] = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_Name = ?', [found_user[0][1]])
                 session["email"] = found_user[0][3]
                 flash(f"{found_user[0][1]} has been logged in!", 'Success')
                 return redirect(url_for("homePage"))
