@@ -33,8 +33,8 @@
                 {% endfor %}
             {% endif %}
           {% endwith %}
-        <p>{% block content %}{% endblock %}</p>
-        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" %}
+        {% block content %}{% endblock %}
+        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" or title == "About" %}
           <div class="footer2">      
         {% else %}
           <div class="footer">
@@ -51,19 +51,19 @@
               <div style="padding-top: 50px;">
                 <center>
                 <h4 class="footer-title"><b>Social media links</b></h4>
-                <a href="https://facebook.com"  class="footer-link">
+                <a href="https://facebook.com"  class="footer-link no-underline">
                   <img src="static/social media icons/facebook.png" class="footer-socials">
                 </a>
-                <a href="https://instagram.com"  class="footer-link">
+                <a href="https://instagram.com"  class="footer-link no-underline">
                   <img src="static/social media icons/instagram.png" class="footer-socials">
                 </a>
-                <a href="https://twitter.com"  class="footer-link">
+                <a href="https://twitter.com"  class="footer-link no-underline">
                   <img src="static/social media icons/twitter.png" class="footer-socials">
                 </a>
-                <a href="https://youtube.com"  class="footer-link">
+                <a href="https://youtube.com"  class="footer-link no-underline">
                   <img src="static/social media icons/youtube.png" class="footer-socials">
                 </a>
-                <a href="https://gmail.com"  class="footer-link">
+                <a href="https://gmail.com"  class="footer-link no-underline">
                   <img src="static/social media icons/social.png" class="footer-socials">
                 </a>
                 </center>

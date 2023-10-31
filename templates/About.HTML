@@ -1,10 +1,38 @@
 {% extends "Base.HTML" %}
 {% block title %}{{title}} Page{% endblock %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
 
-<div>
-    <h1>About page :)</h1>
-</div>
+<body>
+    <div>
+        <img src="static/Index-slideshow/hero.png" class="about-img1">
+    </div>
+    <div class="about-page-grid">
+        <div class="about-page-text">
+            <h1 style="color: teal;"><b><i>About Us</i></b></h1>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+        </div>
+        <div>
+            <img src="static/markiplier-87.PNG" class="about-img2">
+        </div>
+        <div class="about-page-text">
+            <h1 style="color: purple;"><b><i>FAQ</i></b></h1>
+            <h3><em>FAQ 1?</em></h3>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+            <h3><em>FAQ 2?</em></h3>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+        </div>
+        <div>
+            <img src="static/Index-slideshow/gym-2.jpg" class="about-img3">
+        </div>
+        <div class="about-page-text">
+            <h1 style="color: pink;"><b><i>Reviews</i></b></h1><br>
+            <h4><em>Marty - "yeah, it's alright." 0/5</em></h4><br>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+        </div>
+    </div>
+</body>
 
 {% endblock %}

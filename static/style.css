@@ -55,12 +55,12 @@ h2 {
 
 h3 {
     font-size: 36px;
-    font-size: 2vw;
+    /* font-size: 2vw; */
 }
 
 h4 {
     font-size: 28px;
-    font-size: 2vw;
+    /* font-size: 2vw; */
 }
 
 h5 {
@@ -327,6 +327,10 @@ p {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
+.no-underline {
+    text-decoration: none !important;
+}
+
 .footer-link{
     color: #2e2d2d;
     text-decoration: none;
@@ -342,6 +346,7 @@ p {
     width: 50px;
     margin-left: 10px;
     transition: 0.15s ease-in-out;
+    
 }
 
 .footer-socials:hover {
@@ -363,10 +368,11 @@ p {
     margin-right: auto;
     width: 50%;
     max-width: 1100px;
-    max-height: 450px;
-    box-shadow: inset;
-    border-radius: 5%;
-    box-shadow: 1px 1px;
+    width: 60vw;
+    height: 20vw;
+    /* box-shadow: inset; */
+    border-radius: 30%;
+    /* box-shadow: 1px 1px; */
 }
 
 .home-page-text {
@@ -421,4 +427,53 @@ p {
 .home-page-link {
     text-decoration: underline;
     color: teal;
+}
+
+.about-page-text {
+    display: block;
+    background-color: #8cb98d; 
+    border-radius: 10px;
+    width: fit-content;
+    overflow-wrap: anywhere;
+    height: auto;
+    margin: 60px;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    padding: 40px;
+    box-shadow: 10px 10px;
+    float: left;
+}
+
+.about-page-grid {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 10px 0px 10px 0px;
+    padding: 3vw;
+}
+
+.about-img1 {
+    display: block;
+    width: 100%;
+    max-height: 25vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-img2 {
+    display: block;
+    width: 30vw;
+    max-height: 15vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-img3 {
+    display: block;
+    width: 60vw;
+    max-height: 20vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

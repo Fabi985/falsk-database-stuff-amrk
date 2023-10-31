@@ -39,7 +39,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             user = session.get("user")
-            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user])
+            get_user_id = db.queryDB('SELECT User_ID FROM User_Login_TBL WHERE User_Name = ? ', [user[0][1]])
             filename = str(get_user_id[0][0]) + "_user_pic"
             file.save(os.path.join(app.config['UPLOAD_FOLDER']+ "/" + filename))
             current_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [get_user_id[0][0]])
