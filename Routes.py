@@ -177,7 +177,7 @@ def bookingPage():
 
 @app.route("/search-user", methods=['GET', 'POST'])
 def searchUser():
-    title = "booking"
+    title = "Booking"
     user = session.get("user")
     booking_array = [2]
     x = datetime.datetime.now()

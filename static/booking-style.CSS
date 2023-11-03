@@ -55,14 +55,14 @@
 
 .tag-available {
     background-color: green;
-    border: 1px solid grey;
+    border: 2px solid rgb(0, 0, 0);
     color: black;
     border-radius: 5px;
 }
 
 .tag-unavailable {
     background-color: red;
-    border: 1px solid grey;
+    border: 2px solid rgb(0, 0, 0);
     color: black;
     border-radius: 5px;
 }
