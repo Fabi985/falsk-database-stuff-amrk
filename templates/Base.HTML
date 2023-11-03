@@ -12,6 +12,7 @@
           <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="/about">About</a></li>
+            <li><a href="/booking">Bookings</a></li>
             <li><a href="/trainers">Fitness personas</a></li>
             {% if current_user %}
               <li><a href="/user"><img src="../static/Profile_pics/{{ current_user[0][2] }}" id="navbar-pfp"> User: {{ current_user[0][1] }}</a></li>
@@ -34,7 +35,7 @@
             {% endif %}
           {% endwith %}
         {% block content %}{% endblock %}
-        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" or title == "About" %}
+        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" or title == "About" or title == "booking" %}
           <div class="footer2">      
         {% else %}
           <div class="footer">
@@ -46,6 +47,7 @@
                 <a href="/" class="footer-link">Home page</a><br>
                 <a href="/about"  class="footer-link">About page</a><br>
                 <a href="/trainers"  class="footer-link">Fitness personas</a><br>
+                <a href="/booking"  class="footer-link">Bookings</a><br>
                 <a href="/sign-up"  class="footer-link">Don't have an account?</a><br>
               </div>
               <div style="padding-top: 50px;">

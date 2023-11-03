@@ -1,0 +1,46 @@
+{% extends "Base.HTML" %}
+{% block title %}{{title}} Page{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='booking-style.css')}}">
+
+<body>
+    <h1><center>Booking page</center></h1>
+    <div>
+        <form action="/search-user" method="POST" style="margin: 30px;">
+            <p><input type="text" id="user-query" name="user-query" size="35px" placeholder="Search..." autocomplete="off">
+            <input type="submit" name="submit"/></p>
+        </form>
+    </div>
+    <div>
+        {% if bookings %}
+        <div class="search-grid-container" >
+            <div class="card search-card " style="background-color: #8cb98d;">
+                <div class="card-body">
+                    <h3 id="about-text">Booking Name - Date/Time</h3>
+                    <div class="card" style="background-color: white; width: fit-content; border-radius: 100px;">
+                        <img src="../static/Profile_pics/default.png" id="profile-pic">
+                    </div>
+                </div>
+                <div></div>
+                <div></div>
+                <div class="card search-text-cards" style="background-color: #596f62;">
+                    <h4 id="about-text">Bio</h4>
+                    <p id="about-text">{{ trainer_bio }}</p>
+                </div>
+                <div class="card search-text-cards" style="background-color: #596f62;">
+                    <h4 id="about-text">{{ trainer_firstname }} {{trainer_lastname}}</h4>
+                    <p id="about-text">{{ trainer_Desc }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif bookings != False %}
+    <div class="search-grid-container" >
+        <h1><center>Theres currently no available bookings!</center></h1>    
+    </div>
+    {% endif %}
+</body>
+
+
+{% endblock %}

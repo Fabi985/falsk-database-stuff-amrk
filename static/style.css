@@ -41,6 +41,10 @@ transform: translate(-50%, -50%);
 }
 }
 
+@media only screen and (max-width: 910px){
+
+}
+
 h1 {
     font-size: 52px;
     font-size: 2vw;
@@ -350,7 +354,7 @@ p {
 }
 
 .footer-socials:hover {
-    width: 55px;
+    transform: scale(1.1);
 }
 
 .footer-title {
@@ -476,4 +480,12 @@ p {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.tablinks {
+    margin-right: 5px;
+}
+
+.tablinks:hover {
+    transform: scale(1.05);
 }

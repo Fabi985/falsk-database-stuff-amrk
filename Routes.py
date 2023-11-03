@@ -47,6 +47,12 @@ def upload_file():
 
             flash(f"{current_user[0][1]}'s profile has been updated!","Success")
             return redirect(url_for('userPage'))
+        elif allowed_file(file.filename) == False:
+            flash(f"Picture file not available!","danger")
+            return redirect(url_for('userPage'))
+        else:
+            flash(f"An error has occured!","danger")
+            return redirect(url_for('userPage'))
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -130,6 +136,15 @@ def userPage():
     user = session.get("user")
     return render_template("User.HTML", title = title, current_user=user)
 
+
+# This will send the user to the booking page
+@app.route("/booking")
+def bookingPage():
+    title = "booking"
+    user = session.get("user")
+    booking_array = []
+    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array)
+
 # This directs you to the sign up page
 @app.route("/sign-up")
 def signUpPage():
@@ -158,13 +173,16 @@ def logout():
     session.pop("password", None)
     return redirect(url_for("homePage"))
 
-@app.route("/search-user/<string:userSearch>", methods=['GET', 'POST'])
-def searchUser(userSearch):
+@app.route("/search-user", methods=['GET', 'POST'])
+def searchUser():
     current_user = session.get("user")
-    search = db.queryDB("SELECT * FROM User_Data_TBL WHERE User_Name = ?", [userSearch])
+
+    if request.method == "POST":
+        user_search = request.form["user-query"]
+        print(f"You searched this '{user_search}'")
 
 
-    return render_template("search.html", current_user=current_user, search=search)
+    return redirect(url_for("bookingPage"))
 
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():
