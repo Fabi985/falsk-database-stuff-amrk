@@ -415,6 +415,22 @@ p {
     box-shadow: 5px 5px;
 }
 
+.Login-button {
+    background-color: #8cb98d;  
+    border: 1px solid black;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    padding: 7px 50px 7px 50px;
+    transition: 0.20s ease-in-out;
+    font-size: 0.8vw;
+}
+
+.Login-button:hover {
+    background-color: #618061;
+    box-shadow: 5px 5px;
+}
+
 .home-page-grid-container {
     display: grid;
     grid-template-columns: auto auto;

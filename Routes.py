@@ -189,8 +189,8 @@ def searchUser():
         # get_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_Name = ? OR User_First_Name = ?', [user_search, user_search])
         # booking_array.append([get_user, date])
 
-
-    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array)
+    booking_and_trainer_array = db.bookingDB()
+    return render_template("Booking.html", title = title, current_user=user, booking_and_trainer_array=booking_and_trainer_array, search=user_search)
 
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():

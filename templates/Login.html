@@ -40,14 +40,14 @@
         <div class="flipY">
             <form action="/UserLogin" method="POST">
                 <p>Username</p>
-                <p><input type="text" id="nm" name="nm" size="35px"></p>
+                <p><input type="text" id="nm" name="nm" size="35px" ></p>
                 <p>Password</p>
                 <p>
-                    <input type="password" id="pword" name="pword" size="35px">
+                    <input type="password" id="pword" name="pword" size="35px" autocomplete="off">
                     <button type="button" onclick="togglePassword()">Show</button>
                 </p>
                 <!-- <p><input type="submit" name="submit"/></p> -->
-                <button type="submit" name="submit">Search</button>
+                <button type="submit" name="submit" class="Login-button">Log in!</button>
                 <a class="nav-link" href="/register" style="text-align: center; color: black;">Need to Register?</a>
             </form>
         </div>

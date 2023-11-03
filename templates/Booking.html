@@ -23,6 +23,11 @@
             <button>Search</button>
         </form>
     </div>
+    {% if search %}
+            <div class="search-grid-container" >
+                <h1><center>Theres currently no bookings with the term: "{{search}}"</center></h1>    
+            </div>
+    {% endif %}
         {% if booking_and_trainer_array %}
         <div class="search-grid-container" >
             {% for i in booking_and_trainer_array %}
@@ -50,7 +55,15 @@
                     <div class="card search-item2 " style="background-color: #596f62;">
                         <h4>Session Details</h4>
                         <p>{{Booking_Details}}</p>
-                        <button>Book Session</button>
+                        {% if Booking_Availability == "Available" %}
+                            <div style="margin-top: 50px;">
+                                <button class="Booking-button">Book Session</button>
+                            </div>
+                        {% elif Booking_Availability == "Unavailable" %}
+                            <div style="margin-top: 50px;">
+                                <button disabled class="Booking-button">nuh uh</button>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
