@@ -40,11 +40,19 @@
             <div class="tab">
                 <button class="tablinks" onclick="openTab(event, 'Health')" id="defaultOpen">User Health</button>
                 <button class="tablinks" onclick="openTab(event, 'Update')">Update User Profile</button>
+                {% if current_user_membership == "Trainer" %}
+                    <button class="tablinks" onclick="openTab(event, 'Booking')">Booking Information</button>
+                {% endif %}
             </div>
             <!-- Tab content -->
             <div id="Health" class="tabcontent">
                 <h3>uhhhh...</h3>
                 <h4>Somewhat sane ig</h4><br><br>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+            </div>
+
+            <div id="Booking" class="tabcontent">
+                <h3>booking Information</h3><br><br>
                 <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
             </div>
                 

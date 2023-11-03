@@ -36,20 +36,21 @@
 
 <h3 style="text-align: center;">This is a login page</h3> 
 <div class="login-container"> 
-
-<div class="center">
-    <div class="flipY">
-        <form action="/UserLogin" method="POST">
-            <p>Username</p>
-            <p><input type="text" id="nm" name="nm" size="35px"></p>
-            <p>Password</p>
-            <p>
-                <input type="password" id="pword" name="pword" size="35px">
-                <button type="button" onclick="togglePassword()">Show</button>
-            </p>
-            <p><input type="submit" name="submit"/></p>
-            <a class="nav-link" href="/register" style="text-align: center; color: black;">Need to Register?</a>
-        </form>
+    <div class="center">
+        <div class="flipY">
+            <form action="/UserLogin" method="POST">
+                <p>Username</p>
+                <p><input type="text" id="nm" name="nm" size="35px"></p>
+                <p>Password</p>
+                <p>
+                    <input type="password" id="pword" name="pword" size="35px">
+                    <button type="button" onclick="togglePassword()">Show</button>
+                </p>
+                <!-- <p><input type="submit" name="submit"/></p> -->
+                <button type="submit" name="submit">Search</button>
+                <a class="nav-link" href="/register" style="text-align: center; color: black;">Need to Register?</a>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -8,6 +8,7 @@ from DBConnector import Database
 
 import requests
 import hashlib
+import datetime
 
 #defines our database
 db = Database()
@@ -134,16 +135,8 @@ def backToHomePage():
 def userPage():
     title = "User"
     user = session.get("user")
+    session["user"] = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_Name = ?', [user[0][1]])
     return render_template("User.HTML", title = title, current_user=user)
-
-
-# This will send the user to the booking page
-@app.route("/booking")
-def bookingPage():
-    title = "booking"
-    user = session.get("user")
-    booking_array = []
-    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array)
 
 # This directs you to the sign up page
 @app.route("/sign-up")
@@ -173,16 +166,37 @@ def logout():
     session.pop("password", None)
     return redirect(url_for("homePage"))
 
+# This will send the user to the booking page
+@app.route("/booking")
+def bookingPage():
+    title = "booking"
+    user = session.get("user")
+    booking_array = db.queryDB('SELECT * FROM Booking_Data_TBL')
+    trainer_id = []
+    trainer_array = []
+    for i in booking_array:
+        trainer_id.append(i[1])
+    for i in trainer_id:
+        trainer = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [i])
+        trainer_array.append(trainer)
+    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array, Trainers=trainer_array)
+
 @app.route("/search-user", methods=['GET', 'POST'])
 def searchUser():
-    current_user = session.get("user")
+    title = "booking"
+    user = session.get("user")
+    booking_array = [2]
+    x = datetime.datetime.now()
+
+    date = x.day, x.month, x.year
 
     if request.method == "POST":
-        user_search = request.form["user-query"]
-        print(f"You searched this '{user_search}'")
+        user_search = request.form["q"]
+        # get_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_Name = ? OR User_First_Name = ?', [user_search, user_search])
+        # booking_array.append([get_user, date])
 
 
-    return redirect(url_for("bookingPage"))
+    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array)
 
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():

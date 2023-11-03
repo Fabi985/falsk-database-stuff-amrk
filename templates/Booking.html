@@ -7,38 +7,63 @@
 <body>
     <h1><center>Booking page</center></h1>
     <div>
-        <form action="/search-user" method="POST" style="margin: 30px;">
-            <p><input type="text" id="user-query" name="user-query" size="35px" placeholder="Search..." autocomplete="off">
-            <input type="submit" name="submit"/></p>
+        <form 
+        action="/search-user" 
+        method="POST"
+        role="search" 
+        style="margin: 30px;">
+            <input 
+                type="search" 
+                id="mySearch" 
+                name="q" 
+                size="35px" 
+                placeholder="Search..." 
+                autocomplete="off" />
+            <button>Search</button>
         </form>
     </div>
-    <div>
+    {% if current_user %}
         {% if bookings %}
         <div class="search-grid-container" >
-            <div class="card search-card " style="background-color: #8cb98d;">
-                <div class="card-body">
-                    <h3 id="about-text">Booking Name - Date/Time</h3>
-                    <div class="card" style="background-color: white; width: fit-content; border-radius: 100px;">
-                        <img src="../static/Profile_pics/default.png" id="profile-pic">
+            {% for i in bookings %}
+            {% set Trainer_ID = i[1] %}
+            {% set Booking_Name = i[2] %}
+            {% set Booking_Details = i[3] %}
+            {% set Booking_Availability = i[4] %}
+                <div class="search-card">
+                    <div class="card-body search-item1 ">
+                        {% if Booking_Availability == "Available" %}
+                            <h3>{{Booking_Name}} - <span class="tag-available">Available</span></h3>
+                        {% elif Booking_Availability == "Unavailable" %}
+                            <h3>{{Booking_Name}} - <span class="tag-unavailable">Unavailable</span></h3>
+                        {% endif %}
+                        <div class="card" style="background-color: white; width: fit-content; border-radius: 100px; display: inline;">
+                            <img src="../static/Profile_pics/default.png" id="profile-pic">
+                        </div>
+                        <h4>Firstname Lastname</h4>
+                        <h5>@{{Trainer_Username}}</h5>
+                    </div>
+                    <div class="card search-item2 " style="background-color: #596f62;">
+                        <h4>Session Details</h4>
+                        <p>{{Booking_Details}}</p>
+                        <button>Book Session</button>
                     </div>
                 </div>
-                <div></div>
-                <div></div>
-                <div class="card search-text-cards" style="background-color: #596f62;">
-                    <h4 id="about-text">Bio</h4>
-                    <p id="about-text">{{ trainer_bio }}</p>
-                </div>
-                <div class="card search-text-cards" style="background-color: #596f62;">
-                    <h4 id="about-text">{{ trainer_firstname }} {{trainer_lastname}}</h4>
-                    <p id="about-text">{{ trainer_Desc }}</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-    </div>
-    {% elif bookings != False %}
-    <div class="search-grid-container" >
-        <h1><center>Theres currently no available bookings!</center></h1>    
-    </div>
+        {% elif bookings != False %}
+        <div class="search-grid-container" >
+            <h1><center>Theres currently no bookings!</center></h1>    
+        </div>
+        {% endif %}
+    {% elif current_user == False %}
+        <div class="search-grid-container" >
+            <h1><center><span><a href="/Login">Log in or create an account</a></span> to be able to use bookings!</center></h1>    
+        </div>
+    {% else %}
+        <div class="search-grid-container" >
+            <h1><center><span><a href="/Login">Log in or create an account</a></span> to be able to use bookings!</center></h1>    
+        </div>
     {% endif %}
 </body>
 

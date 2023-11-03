@@ -6,6 +6,12 @@
     border-radius: 3px;
 }
 
+.container-header {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
 .user-data{
     margin: 5px 5px;
     padding: 25px 15px;

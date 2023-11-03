@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <!-- 
+
+        <h1>WITH HTML & CSS GUIDANCE FROM BEN</h1>
+
+       -->
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,9 +41,9 @@
           {% endwith %}
         {% block content %}{% endblock %}
         {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" or title == "About" or title == "booking" %}
-          <div class="footer2">      
+          <div class="footer2" style="margin-top: 50px;">      
         {% else %}
-          <div class="footer">
+          <div class="footer" style="margin-top: 50px;">
         {% endif %}
           <footer>
             <div class="footer-grid">
