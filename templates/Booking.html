@@ -6,6 +6,7 @@
 
 <body>
     <h1><center>Booking page</center></h1>
+    {% if current_user %}
     <div>
         <form 
         action="/search-user" 
@@ -22,14 +23,17 @@
             <button>Search</button>
         </form>
     </div>
-    {% if current_user %}
-        {% if bookings %}
+        {% if booking_and_trainer_array %}
         <div class="search-grid-container" >
-            {% for i in bookings %}
+            {% for i in booking_and_trainer_array %}
             {% set Trainer_ID = i[1] %}
             {% set Booking_Name = i[2] %}
             {% set Booking_Details = i[3] %}
             {% set Booking_Availability = i[4] %}
+            {% set Trainer_Username = i[6] %}
+            {% set Trainer_PFP = i[7] %}
+            {% set Trainer_fname = i[11] %}
+            {% set Trainer_lname = i[12] %}
                 <div class="search-card">
                     <div class="card-body search-item1 ">
                         {% if Booking_Availability == "Available" %}
@@ -38,9 +42,9 @@
                             <h3>{{Booking_Name}} - <span class="tag-unavailable">Unavailable</span></h3>
                         {% endif %}
                         <div class="card" style="background-color: white; width: fit-content; border-radius: 100px; display: inline;">
-                            <img src="../static/Profile_pics/default.png" id="profile-pic">
+                            <img src="../static/Profile_pics/{{Trainer_PFP}}" id="profile-pic">
                         </div>
-                        <h4>Firstname Lastname</h4>
+                        <h4>{{Trainer_fname}} {{Trainer_lname}}</h4>
                         <h5>@{{Trainer_Username}}</h5>
                     </div>
                     <div class="card search-item2 " style="background-color: #596f62;">

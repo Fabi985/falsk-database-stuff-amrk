@@ -166,20 +166,14 @@ def logout():
     session.pop("password", None)
     return redirect(url_for("homePage"))
 
-# This will send the user to the booking page
+# This will send the user to the booking page and will display the booking data for the user to see and possibly book
 @app.route("/booking")
 def bookingPage():
+    # db.bookingDropTempTBLDB()
     title = "booking"
     user = session.get("user")
-    booking_array = db.queryDB('SELECT * FROM Booking_Data_TBL')
-    trainer_id = []
-    trainer_array = []
-    for i in booking_array:
-        trainer_id.append(i[1])
-    for i in trainer_id:
-        trainer = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [i])
-        trainer_array.append(trainer)
-    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array, Trainers=trainer_array)
+    booking_and_trainer_array = db.bookingDB()
+    return render_template("Booking.html", title = title, current_user=user, booking_and_trainer_array=booking_and_trainer_array)
 
 @app.route("/search-user", methods=['GET', 'POST'])
 def searchUser():
