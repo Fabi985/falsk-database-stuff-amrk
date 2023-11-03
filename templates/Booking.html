@@ -31,14 +31,14 @@
         {% if booking_and_trainer_array %}
         <div class="search-grid-container" >
             {% for i in booking_and_trainer_array %}
-            {% set Trainer_ID = i[1] %}
-            {% set Booking_Name = i[2] %}
-            {% set Booking_Details = i[3] %}
-            {% set Booking_Availability = i[4] %}
-            {% set Trainer_Username = i[6] %}
-            {% set Trainer_PFP = i[7] %}
-            {% set Trainer_fname = i[11] %}
-            {% set Trainer_lname = i[12] %}
+            {% set Trainer_ID = i[0] %}
+            {% set Booking_Name = i[1] %}
+            {% set Booking_Details = i[2] %}
+            {% set Booking_Availability = i[3] %}
+            {% set Trainer_Username = i[4] %}
+            {% set Trainer_PFP = i[5] %}
+            {% set Trainer_fname = i[6] %}
+            {% set Trainer_lname = i[7] %}
                 <div class="search-card">
                     <div class="card-body search-item1 ">
                         {% if Booking_Availability == "Available" %}

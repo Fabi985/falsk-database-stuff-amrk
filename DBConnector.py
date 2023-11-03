@@ -50,7 +50,7 @@ CREATE TEMPORARY TABLE temp_tbl AS
 """
         cur.execute(create_temp_table_sql)
         select_from_temp_table_sql = """
-SELECT *
+SELECT Booking_ID, Booking_Name, Booking_Details, Booking_Availability, User_Name, User_Profile, User_First_Name, User_Last_Name
 FROM temp_tbl
 CROSS JOIN User_Data_TBL
 USING (User_ID);
