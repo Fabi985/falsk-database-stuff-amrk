@@ -58,11 +58,22 @@
         </div>
         <!-- popup form -->
         <div class="form-popup" id="myForm">
-            <form action="/" class="form-container">
+            <form action="/Session-booking" method="POST" class="form-container">
             <h1><center>Book a session</center></h1>
 
             <label>Trainer</label><br>
-            <label>USERNAME</label><br>
+            <select type="text" class="form-control pop-up-dropdown" id="trainer" name="trainer" required="true">
+                <option value="" disabled selected>Select a trainer</option>
+                {% for i in Trainers %}
+                    {% set Trainer_ID = i[0][0] %}
+                    {% set Trainer_Username = i[0][1] %}
+                    {% set Trainer_PFP = i[0][2] %}
+                    {% set Trainer_desc = i[0][4] %}
+                    {% set Trainer_fname = i[0][6] %}
+                    {% set Trainer_lname = i[0][7] %}
+                    <option value={{Trainer_ID}}>{{Trainer_fname}} {{Trainer_lname}}</option>
+                {% endfor %}
+            </select>
 
             <label>Date</label>
             <input type="date" class="form-control" id="date" name="date" required="true"><br>

@@ -198,6 +198,19 @@ def searchUser():
 
     return render_template("Booking.html", title = title, current_user=user, search=user_search, Trainers=trainers_array)
 
+@app.route("/Session-booking", methods=['GET', 'POST'])
+def sessionBooking():
+    title = "Session Booking"
+    current_user = session.get('user')
+
+    if request.method == "POST":
+        trainer_ID = request.form["trainer"]
+        date = request.form["date"]
+        time = request.form["tavailable"]
+        user_ID = current_user[0][0]
+    
+    return redirect(url_for("userPage"))
+
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():
     title = "Login"
