@@ -170,10 +170,14 @@ def logout():
 @app.route("/booking")
 def bookingPage():
     # db.bookingDropTempTBLDB()
-    title = "booking"
+    title = "Booking"
     user = session.get("user")
-    booking_and_trainer_array = db.bookingDB()
-    return render_template("Booking.html", title = title, current_user=user, booking_and_trainer_array=booking_and_trainer_array)
+    trainers = db.queryDB('SELECT * FROM Trainer_TBL')
+    trainers_array = []
+    for trainer in trainers:
+        trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
+        trainers_array.append(trainer_data)
+    return render_template("Booking.html", title = title, current_user=user, Trainers=trainers_array)
 
 @app.route("/search-user", methods=['GET', 'POST'])
 def searchUser():
@@ -186,11 +190,13 @@ def searchUser():
 
     if request.method == "POST":
         user_search = request.form["q"]
-        # get_user = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_Name = ? OR User_First_Name = ?', [user_search, user_search])
-        # booking_array.append([get_user, date])
+        trainers = db.queryDB('SELECT * FROM Trainer_TBL')
+        trainers_array = []
+        for trainer in trainers:
+            trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
+            trainers_array.append(trainer_data)
 
-    booking_and_trainer_array = db.bookingDB()
-    return render_template("Booking.html", title = title, current_user=user, booking_and_trainer_array=booking_and_trainer_array, search=user_search)
+    return render_template("Booking.html", title = title, current_user=user, search=user_search, Trainers=trainers_array)
 
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():

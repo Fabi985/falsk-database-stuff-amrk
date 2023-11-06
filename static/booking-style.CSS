@@ -1,6 +1,21 @@
+.booking-title {
+    display: block;
+    background-color: teal;
+    color: white;
+    width: 15vw;
+    height: 3vw;
+    display: block;
+    margin-top: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    box-shadow: 5px 5px;
+}
+
 .search-card {
     display: grid;
     grid-template-columns: auto auto;
+    max-width: 100vw;
     
     grid-column-gap: 10px;
     grid-row-gap: 25px;
@@ -18,6 +33,7 @@
     text-align: left;
     max-width: 35vw;
     overflow-wrap: anywhere;
+    width: 300px;
 }
 
 .search-item2 {
@@ -27,7 +43,7 @@
     font-size: 30px;
     text-align: left;
     overflow-wrap: anywhere;
-    width: 65vw;
+    width: 75vw;
 }
 
 .search-text-cards {
@@ -85,8 +101,7 @@
     box-shadow: 5px 5px;
 }
 
-.Booking-button:disabled,
-button[disabled]{
+.Booking-button-disabled{
     background-color: rgb(41, 62, 62); 
     border: none;
     border-radius: 50px;
@@ -97,9 +112,9 @@ button[disabled]{
     transition: 0.20s ease-in-out;
     font-size: 0.8vw;
     transform: scale(1.3);
+    
 }
 
-.Booking-button:hover,
-button[disabled] {
+.Booking-button-disabled {
     background-color: rgb(41, 62, 62); 
 }

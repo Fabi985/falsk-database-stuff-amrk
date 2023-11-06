@@ -18,7 +18,6 @@
             <li><a href="/home">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/booking">Bookings</a></li>
-            <li><a href="/trainers">Fitness personas</a></li>
             {% if current_user %}
               <li><a href="/user"><img src="../static/Profile_pics/{{ current_user[0][2] }}" id="navbar-pfp"> User: {{ current_user[0][1] }}</a></li>
               <li style="float:right"><a class="logout" href="/logout">Logout</a></li>
@@ -40,7 +39,7 @@
             {% endif %}
           {% endwith %}
         {% block content %}{% endblock %}
-        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" or title == "About" or title == "booking" %}
+        {% if title == "User" or title == "Trainer Personas" or title == "Sign Up" or title == "Home" or title == "About" or title == "Booking" %}
           <div class="footer2" style="margin-top: 50px;">      
         {% else %}
           <div class="footer" style="margin-top: 50px;">
