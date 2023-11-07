@@ -36,35 +36,7 @@ class Database:
         result = cur.fetchall() # Gets al the results
         self.disconnect(conn) # call the disconnect function
         return result
-    
-    # This will try join the trainer table and booking table and then eventually the user data one as well
-    def bookingDB(self):
-        conn = self.connect()
-        cur = conn.cursor()
-        create_temp_table_sql = """
-CREATE TEMPORARY TABLE temp_tbl AS
-    SELECT *
-    FROM Booking_Data_TBL
-    CROSS JOIN Trainer_TBL
-    USING (Trainer_ID);
-"""
-        cur.execute(create_temp_table_sql)
-        select_from_temp_table_sql = """
-SELECT Booking_ID, Booking_Name, Booking_Details, Booking_Availability, User_Name, User_Profile, User_First_Name, User_Last_Name
-FROM temp_tbl
-CROSS JOIN User_Data_TBL
-USING (User_ID);
-"""     
-        cur.execute(select_from_temp_table_sql)
-        conn.commit() # commits to the transactions
-        result = cur.fetchall()
-        return result
 
-    def bookingDropTempTBLDB(self):
-        conn = self.connect()
-        cur = conn.cursor()
-        drop_temp_table_sql = "DROP TABLE temp_tbl"
-        cur.execute(drop_temp_table_sql)
 #--------------------------------------------------------------------------------------------------------------------------------------------------#
 
     # close out database

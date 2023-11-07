@@ -3,116 +3,44 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='booking-style.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='popop-form-style.css')}}">
 
 <body>
-    <h1 class="booking-title"><center>Booking page</center></h1>
-    {% if current_user %}
+    <h1><center>Booking page</center></h1>
     <div>
-        <form 
-        action="/search-user" 
-        method="POST"
-        role="search" 
-        style="margin: 30px;">
-            <input 
-                type="search" 
-                id="mySearch" 
-                name="q" 
-                size="35px" 
-                placeholder="Search..." 
-                autocomplete="off" />
-            <button>Search</button>
+        <form action="/search-user" method="POST" style="margin: 30px;">
+            <p><input type="text" id="user-query" name="user-query" size="35px" placeholder="Search..." autocomplete="off">
+            <input type="submit" name="submit"/></p>
         </form>
     </div>
-    {% if search %}
-            <div class="search-grid-container" >
-                <h1><center>Theres currently no trainers with the term: "{{search}}"</center></h1>    
-            </div>
-    {% endif %}
-        {% if Trainers %}
+    <div>
+        {% if bookings %}
         <div class="search-grid-container" >
-            {% for i in Trainers %}
-                {% set Trainer_ID = i[0][0] %}
-                {% set Trainer_Username = i[0][1] %}
-                {% set Trainer_PFP = i[0][2] %}
-                {% set Trainer_desc = i[0][4] %}
-                {% set Trainer_fname = i[0][6] %}
-                {% set Trainer_lname = i[0][7] %}
-                <div class="search-card">
-                    <div class="card-body search-item1 ">
-                        <div class="card" style="background-color: white; width: fit-content; border-radius: 100px; display: inline;">
-                            <img src="../static/Profile_pics/{{Trainer_PFP}}" id="profile-pic">
-                        </div>
-                        <h4>{{Trainer_fname}} {{Trainer_lname}}</h4>
-                        <h5>@{{Trainer_Username}}</h5>
-                    </div>
-                    <div class="card search-item2">
-                        <h4>Trainer Description</h4>
-                        <p>{{Trainer_desc}}</p>
-                        <div style="margin-top: 50px;">
-                            <button class="Booking-button" onclick="openForm()">Book Session</button>
-                        </div>
+            <div class="card search-card " style="background-color: #8cb98d;">
+                <div class="card-body">
+                    <h3 id="about-text">Booking Name - Date/Time</h3>
+                    <div class="card" style="background-color: white; width: fit-content; border-radius: 100px;">
+                        <img src="../static/Profile_pics/default.png" id="profile-pic">
                     </div>
                 </div>
-                {% endfor %}
+                <div></div>
+                <div></div>
+                <div class="card search-text-cards" style="background-color: #596f62;">
+                    <h4 id="about-text">Bio</h4>
+                    <p id="about-text">{{ trainer_bio }}</p>
+                </div>
+                <div class="card search-text-cards" style="background-color: #596f62;">
+                    <h4 id="about-text">{{ trainer_firstname }} {{trainer_lastname}}</h4>
+                    <p id="about-text">{{ trainer_Desc }}</p>
+                </div>
+            </div>
         </div>
-        <!-- popup form -->
-        <div class="form-popup" id="myForm">
-            <form action="/Session-booking" method="POST" class="form-container">
-            <h1><center>Book a session</center></h1>
-
-            <label>Trainer</label><br>
-            <select type="text" class="form-control pop-up-dropdown" id="trainer" name="trainer" required="true">
-                <option value="" disabled selected>Select a trainer</option>
-                {% for i in Trainers %}
-                    {% set Trainer_ID = i[0][0] %}
-                    {% set Trainer_Username = i[0][1] %}
-                    {% set Trainer_PFP = i[0][2] %}
-                    {% set Trainer_desc = i[0][4] %}
-                    {% set Trainer_fname = i[0][6] %}
-                    {% set Trainer_lname = i[0][7] %}
-                    <option value={{Trainer_ID}}>{{Trainer_fname}} {{Trainer_lname}}</option>
-                {% endfor %}
-            </select>
-
-            <label>Date</label>
-            <input type="date" class="form-control" id="date" name="date" required="true"><br>
-
-            <label>Time available</label>
-            <select type="text" class="form-control pop-up-dropdown" id="tavailable" name="tavailable" required="true">
-                <option value="" disabled selected>Select an available time</option>
-                <option value="10AM">10 Am</option>
-                <option value="12AM">12 Am</option>
-                <option value="1PM">1 Pm</option>
-            </select>
-        
-            <button type="submit" class="btn">Select</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </form>
-        </div>
-        {% elif Trainers != False %}
-        <div class="search-grid-container" >
-            <h1><center>Theres currently no Trainers!</center></h1>    
-        </div>
-        {% endif %}
-    {% elif current_user == False %}
-        <div class="search-grid-container" >
-            <h1><center><span><a href="/Login">Log in or create an account</a></span> to be able to use bookings!</center></h1>    
-        </div>
-    {% else %}
-        <div class="search-grid-container" >
-            <h1><center><span><a href="/Login">Log in or create an account</a></span> to be able to use bookings!</center></h1>    
-        </div>
+    </div>
+    {% elif bookings != False %}
+    <div class="search-grid-container" >
+        <h1><center>Theres currently no available bookings!</center></h1>    
+    </div>
     {% endif %}
-    <script>
-        function openForm() {
-      document.getElementById("myForm").style.display = "block";
-    }
-    
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    }
-    </script>
 </body>
+
 
 {% endblock %}

@@ -8,7 +8,6 @@ from DBConnector import Database
 
 import requests
 import hashlib
-import datetime
 
 #defines our database
 db = Database()
@@ -135,8 +134,16 @@ def backToHomePage():
 def userPage():
     title = "User"
     user = session.get("user")
-    session["user"] = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_Name = ?', [user[0][1]])
     return render_template("User.HTML", title = title, current_user=user)
+
+
+# This will send the user to the booking page
+@app.route("/booking")
+def bookingPage():
+    title = "booking"
+    user = session.get("user")
+    booking_array = []
+    return render_template("Booking.html", title = title, current_user=user, bookings=booking_array)
 
 # This directs you to the sign up page
 @app.route("/sign-up")
@@ -166,50 +173,16 @@ def logout():
     session.pop("password", None)
     return redirect(url_for("homePage"))
 
-# This will send the user to the booking page and will display the booking data for the user to see and possibly book
-@app.route("/booking")
-def bookingPage():
-    # db.bookingDropTempTBLDB()
-    title = "Booking"
-    user = session.get("user")
-    trainers = db.queryDB('SELECT * FROM Trainer_TBL')
-    trainers_array = []
-    for trainer in trainers:
-        trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
-        trainers_array.append(trainer_data)
-    return render_template("Booking.html", title = title, current_user=user, Trainers=trainers_array)
-
 @app.route("/search-user", methods=['GET', 'POST'])
 def searchUser():
-    title = "Booking"
-    user = session.get("user")
-    booking_array = [2]
-    x = datetime.datetime.now()
-
-    date = x.day, x.month, x.year
+    current_user = session.get("user")
 
     if request.method == "POST":
-        user_search = request.form["q"]
-        trainers = db.queryDB('SELECT * FROM Trainer_TBL')
-        trainers_array = []
-        for trainer in trainers:
-            trainer_data = db.queryDB('SELECT * FROM User_Data_TBL WHERE User_ID = ?', [trainer[1]])
-            trainers_array.append(trainer_data)
+        user_search = request.form["user-query"]
+        print(f"You searched this '{user_search}'")
 
-    return render_template("Booking.html", title = title, current_user=user, search=user_search, Trainers=trainers_array)
 
-@app.route("/Session-booking", methods=['GET', 'POST'])
-def sessionBooking():
-    title = "Session Booking"
-    current_user = session.get('user')
-
-    if request.method == "POST":
-        trainer_ID = request.form["trainer"]
-        date = request.form["date"]
-        time = request.form["tavailable"]
-        user_ID = current_user[0][0]
-    
-    return redirect(url_for("userPage"))
+    return redirect(url_for("bookingPage"))
 
 @app.route("/UserLogin", methods=['GET', 'POST'])
 def userLogin():

@@ -6,12 +6,6 @@
     border-radius: 3px;
 }
 
-.container-header {
-  display: flex;
-  align-items: left;
-  justify-content: left;
-}
-
 .user-data{
     margin: 5px 5px;
     padding: 25px 15px;
@@ -93,11 +87,3 @@
     border: 1px solid #648565;
     border-top: none;
   }
-
-.session-booking-grid {
-  display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px
-}
